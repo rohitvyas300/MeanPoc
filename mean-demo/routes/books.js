@@ -5,23 +5,40 @@ var Book = require('../app/models/Books');
 
 
 
-/* GET ALL BOOKS */
+/* GET ALL BOOKS
 router.get('/', function(req, res, next) {
   Book.find(function (err, products) {
     if (err) return next(err);
     res.json(products);
   });
 });
-
-/* GET SINGLE BOOK BY ID */
+ */
+/* GET SINGLE BOOK BY ID 
 router.get('/:id', function(req, res, next) {
   Book.findById(req.params.id, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
+*/
+
+// Home page route.
+router.get('/', function (req, res) {
+  Book.find(function (err, products) {
+      if (err) return next(err);
+      res.json(products);
+    });
+}) 
 
 
+// About page route.
+router.get('/about', function (req, res) {
+  Book.find({ 'author': 'ttd' }, 'title', function (err, products) {
+      if (err) return next(err);
+        res.json(products);
+})
+
+})
 
   /* GET SINGLE BOOK BY author ddddd  
 router.get('/author', function(req, res, next) {
