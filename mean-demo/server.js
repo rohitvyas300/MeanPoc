@@ -27,14 +27,8 @@ app.use('/api', require('./routes/api'));
 app.use('/book', require('./routes/books'));
 
 //app.use('/author', require('./routes/books'));
+app.use('/catalog', require('./routes/catalog'));
 
-
-//var wiki = require('./routes/test_del');
-app.use('/wiki', require('./routes/test'));
-
-
-
-// sample api route
 // grab the student model we just created
 var Student = require('./app/models/students');
 app.get('/api/students', function(req, res) {
