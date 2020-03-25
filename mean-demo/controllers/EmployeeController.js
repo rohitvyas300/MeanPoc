@@ -1,6 +1,6 @@
 var Employee = require('../app/models/EmployeeDetails');
 
-// Display list of all books.
+// Display list of all Employee records.
 exports.employee_list = function(req, res) {
   Employee.find(function (err, products) {
         if (err) return next(err);
@@ -86,7 +86,22 @@ exports.certificate_count_monthwise = function(req, res) {
                                             Employee.find({"PrgLangCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangCompletionDate) {
                                             if (err) return next(err);
                                             count.PrgLangCompletionDate = PrgLangCompletionDate.length;
-                                            res.json(count);
+
+                                                Employee.find({"DevOpsPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsPlanDate) {
+                                                if (err) return next(err);
+                                                count.DevOpsPlanDate = DevOpsPlanDate.length;
+                                                
+                                                      Employee.find({"DevOpsActualPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsActualPlanDate) {
+                                                      if (err) return next(err);
+                                                      count.DevOpsActualPlanDate = DevOpsActualPlanDate.length;
+                                                      
+                                                        Employee.find({"DevOpsCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsCompletionDate) {
+                                                          if (err) return next(err);
+                                                          count.DevOpsCompletionDate = DevOpsCompletionDate.length;
+                                                          res.json(count);
+                                                        });
+                                                    });
+                                              });                                                
                                           });
                                       });
                                   });  
@@ -99,9 +114,18 @@ exports.certificate_count_monthwise = function(req, res) {
 };
 
 
-//db.bios.find( { birth: { $gt: new Date('1940-01-01'), $lt: new Date('1960-01-01') } } )
-//find({"OrderDateTime":{ $gte:ISODate("2019-02-10"), $lt:ISODate("2019-02-21") }
-//}).pretty();
+
+
+// Display detail page for a specific book.
+exports.singleemployee_detail = function(req, res) {
+  Employee.findById(req.params._id, req.body, function (err, products){
+          if (err) return next(err);
+            res.json(products);
+      });
+};
+
+
+
 
 // Display detail page for a specific book.
 exports.employee_detail = function(req, res) {
