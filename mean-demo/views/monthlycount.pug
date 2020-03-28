@@ -1,0 +1,42 @@
+doctype html
+html(lang='en')
+  head
+    title Staff Directory
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.css')
+    style.
+      table.ui.celled img { display: inline-block; }
+      footer { margin: 35px 0 15px 0; text-align: center }
+  body
+    main#main
+    h1.ui.center.aligned.header Staff Directory
+    .ui.container
+      table.ui.celled.table.center.aligned
+        thead
+          tr
+            th Track
+            th Planned
+            th Actual
+            tr 
+            th Agile
+            th #{count.AgilePlanDate}
+            th #{count.AgileActualDate}
+            tr 
+            th AutomationTool
+            th #{count.AutomationToolPlanDate}
+            th #{count.AutomationToolActualDate}
+          tr 
+          th ProgrammingLanguage
+          th #{count.PrgLangPlanDate}
+          th #{count.PrgLangActualDate}
+          tr 
+          th DevOpsProfessional
+          th #{count.DevOpsPlanDate}
+          th #{count.DevOpsActualPlanDate}
+        tbody
+          
+
+        tfoot
+          tr
+            th(colspan='6')
+    footer
+      p © #{new Date().getFullYear()} My Company

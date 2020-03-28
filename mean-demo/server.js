@@ -12,7 +12,7 @@ var db = require('./config/db');
 console.log("connecting--",db);
 mongoose.connect(db.url); //Mongoose connection created
 
-
+app.set('view engine', 'pug');
 // Express
 //var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
