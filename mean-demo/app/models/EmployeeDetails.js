@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
 
 var SDETSchema = new mongoose.Schema({
-  EmpNum: String,
+  EmpNum:
+  { type: String,
+    required: true
+  }, 
   Source: String,
   AssignAccount: String,
   JlEmail: String,
@@ -62,7 +65,11 @@ var SDETSchema = new mongoose.Schema({
   DBActualPlanDate:Date,
   DBCompletionDate:Date,
   DBStatus:String,
-  EmpName: String,
+  EmpName: 
+  { 
+    type: String,
+    required: true
+  },
   EmpRoleCode:String,
   ActDesc:String,
   Role:String,

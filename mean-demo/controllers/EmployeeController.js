@@ -10,6 +10,8 @@ exports.employee_list = function(req, res) {
 
 // create new employee.
 exports.add_employee = function(req, res,next) {
+  console.log('inside Add emplioyyeee....')
+  console.log(req.body);
   Employee.create(req.body, function (err, products) {
         if (err) return next(err);
         res.json(products);
@@ -47,85 +49,8 @@ exports.employeeList_month1 = function(req, res) {
 
 
 // Display certification count based on date range.
-exports.certificate_count_monthwise12 = function(req, res) {
-  var fromdate = req.query.fromdate;
-  var todate = req.query.todate;
-  var count = {};
-  Employee.find({"AgilePlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}},function (err, AgilePlanDate) {
-    if (err) return next(err);
-    count.AgilePlanDate = AgilePlanDate.length;
-        
-        Employee.find({"AgileActualDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AgileActualDate) {
-        if (err) return next(err);
-        count.AgileActualDate = AgileActualDate.length;
-      
-               Employee.find({"AgileCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AgileCompletionDate) {
-                if (err) return next(err);
-                count.AgileCompletionDate = AgileCompletionDate.length;
-
-                    Employee.find({"AutomationToolPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AutomationToolPlanDate) {
-                      if (err) return next(err);
-                      count.AutomationToolPlanDate = AutomationToolPlanDate.length;
-
-                          Employee.find({"AutomationToolActualDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AutomationToolActualDate) {
-                          if (err) return next(err);
-                          count.AutomationToolActualDate = AutomationToolActualDate.length;
-
-                              Employee.find({"AutomationToolCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AutomationToolCompletionDate) {
-                                if (err) return next(err);
-                                count.AutomationToolCompletionDate = AutomationToolCompletionDate.length;
-
-                                    Employee.find({"PrgLangPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangPlanDate) {
-                                    if (err) return next(err);
-                                    count.PrgLangPlanDate = PrgLangPlanDate.length;
-
-                                        Employee.find({"PrgLangActualDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangActualDate) {
-                                        if (err) return next(err);
-                                        count.PrgLangActualDate = PrgLangActualDate.length;
-
-                                            Employee.find({"PrgLangCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangCompletionDate) {
-                                            if (err) return next(err);
-                                            count.PrgLangCompletionDate = PrgLangCompletionDate.length;
-
-                                                Employee.find({"DevOpsPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsPlanDate) {
-                                                if (err) return next(err);
-                                                count.DevOpsPlanDate = DevOpsPlanDate.length;
-                                                
-                                                      Employee.find({"DevOpsActualPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsActualPlanDate) {
-                                                      if (err) return next(err);
-                                                      count.DevOpsActualPlanDate = DevOpsActualPlanDate.length;
-                                                      
-                                                        Employee.find({"DevOpsCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsCompletionDate) {
-                                                          if (err) return next(err);
-                                                          count.DevOpsCompletionDate = DevOpsCompletionDate.length;
-                                                          console.log('hers ois 9999999999');
-                                                         // Object.keys(count).length;
-                                                          console.log(Object.keys(count).length );
-                                                          console.log(count.AutomationToolActualDate);
-
-                                                          //console.log(count[2]);
-
-                                                          res.render('tes', { title: 'tes'});
-                                                         // res.render('monthlycount', { title: 'monthlycount', count});
-                                                        });
-                                                    });
-                                              });                                                
-                                          });
-                                      });
-                                  });  
-                              });
-                          });
-                    });
-              });
-        });
-  }); 
-};
-
-
-
-// Display certification count based on date range.
 exports.certificate_count_monthwise = function(req, res,next) {
-  //var fromdate = req.query.startdate;
+ // var fromdate = req.body.
   //var todate = req.query.enddate;
   var fromdate = req.query.startdate;
   var todate = req.query.enddate
@@ -252,8 +177,8 @@ exports.employee_detail = function(req, res) {
 
 // Display detail page for a specific book.
 exports.indexpage =  function(req, res, next) {
-  console.log("god is great....");
-  console.log(req.query.EmpName);
+  console.log("god is greater....");
+ // console.log(req.query.EmpName);
   Employee.find(function (err, products) {
  // if(req.query.EmpName == 'Rohit Vyas'){
    // Employee.find({ 'EmpName': 'Rohit Vyas' }, 'EmpNum EmpName AssignAccount AgilePlanDate EmpRoleCode City Location', function (err, products) {
@@ -268,6 +193,13 @@ exports.monthlypage =  function(req, res) {
   console.log("god is great....");
     res.render('monthlyPage', { title: 'monthhan'});
 };
+
+// Display detail page for a specific book.
+exports.addaccountpage =  function(req, res) {
+  console.log("god is great....");
+    res.render('addaccountPage', { title: 'add'});
+};
+
 
 
 

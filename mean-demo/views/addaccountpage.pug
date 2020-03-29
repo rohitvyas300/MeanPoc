@@ -1,0 +1,146 @@
+doctype html
+head
+  title Index Page
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+.container
+  form#formmonth(name='month' method='post' action='/create/')
+    .row
+      h4 Employee Details
+      .input-group.input-group-icon
+        input(type='text' placeholder='Emp Number' name='EmpNum')
+        input(type='text' placeholder='Emp Name' name='EmpName')
+        .input-icon
+          i.fa.fa-user1
+      .input-group.input-group-icon
+        input(type='text' placeholder='Role' name='Role')
+        input(type='text' placeholder='Emp Role Code' name='EmpRoleCode')
+        .input-icon
+          i.fa.fa-envelope
+      .input-group.input-group-icon
+        input(type='text' placeholder='Act Desc' name='ActDesc')
+        input(type='text' placeholder='Emp Band Code' name='EmpBandCode')
+        .input-icon
+          i.fa.fa-key1
+      .input-group.input-group-icon
+        input(type='text' placeholder='Location' name='Location')
+        input(type='text' placeholder='City' name='City')
+        .input-icon
+          i.fa.fa-key2
+      .input-group.input-group-icon
+        input(type='text' placeholder='Project Code' name='ProjectCode')
+        .input-icon
+          i.fa.fa-key3
+    .row
+      h4 Employer Details
+      .input-group
+        .col-third
+        .col-third
+          input(type='text' placeholder='Source' name='Source')
+          input(type='text' placeholder='Assign Account' name='AssignAccount')
+        .col-third
+          input(type='email' placeholder='JlEmail' name='JlEmail')
+          input(type='text' placeholder='Master Customer' name='MasterCustomer')
+        .col-third
+          input(type='text' placeholder='Portfolio' name='Portfolio')
+          input(type='text' placeholder='DU' name='DU')
+        .col-third
+          input(type='text' placeholder='AccountSpoke' name='AccountSpoke')
+          input(type='text' placeholder='site' name='MasterCustomer')
+    .row
+      .col-half
+        h3 Certification Details
+        .input-group
+          .col-third
+            input(type='text' placeholder='Sdet Foundation' name='SdetFoundation')
+            input(type='text' placeholder='certis Completed' name='certisCompleted')
+          .col-third
+            input.textbox-n(placeholder='Fssf plan Date' name='FssFplanDate' type='text' onfocus="(this.type='date')")
+            input.textbox-n(placeholder='Fssf ActualDate' name='FssfActualDate' type='text' onfocus="(this.type='date')")
+          input(type='text' placeholder='Sdettag' name='Sdettag')
+        h5 Agile
+        .col-third
+          input(placeholder='Agile Plan Date' name='AgilePlanDate' type='text' onfocus="(this.type='date')")
+          input(placeholder='Agile Actual Date' name='AgileActualDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Agile Completion Date' name='AgileCompletionDate' type='text' onfocus="(this.type='date')")
+          input(type='text' placeholder='AgileStatus' name='AgileStatus')
+        .col-third
+          input(type='text' placeholder='Agile Certification Name' name='AgileCertificationName')
+        h5 Automation Tool
+        .col-third
+          input(type='text' placeholder='Automation Tool' name='AutomationTool')
+          input(type='text' placeholder='Status' name='AutomationToolStatus')
+        .col-third
+          input(placeholder='Plan Date' name='AutomationToolPlanDate' type='text' onfocus="(this.type='date')")
+          input(placeholder='Actual Date' name='AutomationToolActualDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Completion Date' name='AutomationToolCompletionDate' type='text' onfocus="(this.type='date')")
+          input(type='text' placeholder='Certification Name' name='AutomationToolCertificationName')
+        h5 Programming Language
+        .col-third
+          input(type='text' placeholder='Programming Language' name='ProgrammingLanguage')
+          input(type='text' placeholder='Status' name='PrgLangStatus')
+        .col-third
+          input(placeholder='Plan Date' name='PrgLangPlanDate' type='text' onfocus="(this.type='date')")
+          input(placeholder='Actual Date' name='PrgLangActualDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Completion Date' name='PrgLangCompletionDate' type='text' onfocus="(this.type='date')")
+          input(type='text' placeholder='Certification Name' name='ProgLangCertificationName')
+        h5 DevOps
+        .col-third
+          input(type='text' placeholder='DevOps Professional' name='DevOpsProfessional')
+          input(type='text' placeholder='Status' name='DevOpsStatus')
+        .col-third
+          input(placeholder='Plan Date' name='DevOpsPlanDate' type='text' onfocus="(this.type='date')")
+          input(placeholder='Actual Date' name='DevOpsActualPlanDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Completion Date' name='DevOpsCompletionDate' type='text' onfocus="(this.type='date')")
+          input(type='text' placeholder='Certification Name' name='CertificationName')
+        h5 BDD
+        .col-third
+          input(type='text' placeholder='BDD Tool' name='BDDTool')
+          input(type='text' placeholder='Status' name='BDDStatus')
+        .col-third
+          input(placeholder='Plan Date' name='BDDPlanDate' type='text' onfocus="(this.type='date')")
+          input(placeholder='Actual Date' name='BDDPActualPlanDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Completion Date' name='BDDCompletionDate' type='text' onfocus="(this.type='date')")
+        h5 Front End
+        .col-third
+          input(type='text' placeholder='Front End Language' name='FrontEndLanguage')
+          input(type='text' placeholder='Status' name='FrontEndStatus')
+        .col-third
+          input(placeholder='Plan Date' name='FrontPlanDate' type='text' onfocus="(this.type='date')")
+          input(placeholder='Actual Date' name='FrontActualPlanDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Completion Date' name='FrontCompletionDate' type='text' onfocus="(this.type='date')")
+        h5 Cloud
+        .col-third
+          input(type='text' placeholder='Status' name='CloudStatus')
+        .col-third
+          input(placeholder='Plan Date' name='CloudPlanDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Actual Date' name='CloudActualPlanDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Completion Date' name='CloudCompletionDate' type='text' onfocus="(this.type='date')")
+        h5 API
+        .col-third
+          input(type='text' placeholder='API' name='API')
+          input(type='text' placeholder='Status' name='APIStatus')
+        .col-third
+          input(placeholder='Plan Date' name='APIPlanDate' type='text' onfocus="(this.type='date')")
+          input(placeholder='Actual Date' name='APIActualPlanDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Completion Date' name='APICompletionDate' type='text' onfocus="(this.type='date')")
+        h5 DB
+        .col-third
+          input(type='text' placeholder='DB' name='DB')
+          input(type='text' placeholder='Status' name='DBStatus')
+        .col-third
+          input(placeholder='Plan Date' name='DBPlanDate' type='text' onfocus="(this.type='date')")
+          input(placeholder='Actual Date' name='DBActualPlanDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          input(placeholder='Completion Date' name='DBCompletionDate' type='text' onfocus="(this.type='date')")
+        .col-third
+          button#btnSubmit(type='submit') Submit

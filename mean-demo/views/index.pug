@@ -23,6 +23,13 @@ head
     list-style-type: none;
     padding: 0;
     }
+    a {
+    line-height: 1em;
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px;
+    margin: 10px;
+    }
     article {
     float: left;
     padding: 20px;
@@ -56,6 +63,7 @@ head
     text-align: center;
     color: white;
     }
+    
     /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
     @media (max-width: 600px) {
     nav, article {
@@ -66,8 +74,8 @@ head
 header
   h2 Certificate Portal
 .cities
-  h2
-    a(href='catalog/monthlypage') month
+a(href='monthlypage') month
+a(href='addaccount') Add Employee
 body
     <button id="cmd">generate PDF</button>
      main#main
