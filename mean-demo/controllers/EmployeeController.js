@@ -11,10 +11,13 @@ exports.employee_list = function(req, res) {
 // create new employee.
 exports.add_employee = function(req, res,next) {
   console.log('inside Add emplioyyeee....')
-  console.log(req.body);
+  //console.log(req.body);
+ // console.log(req.body.EmpName,req.body.EmpNum,req.body.Role)
   Employee.create(req.body, function (err, products) {
         if (err) return next(err);
-        res.json(products);
+        //res.json(products);
+        //res.render('index', { title: 'index', indexpage:products});
+        res.redirect('/');
       });
 };
 
@@ -178,13 +181,11 @@ exports.employee_detail = function(req, res) {
 // Display detail page for a specific book.
 exports.indexpage =  function(req, res, next) {
   console.log("god is greater....");
- // console.log(req.query.EmpName);
   Employee.find(function (err, products) {
- // if(req.query.EmpName == 'Rohit Vyas'){
-   // Employee.find({ 'EmpName': 'Rohit Vyas' }, 'EmpNum EmpName AssignAccount AgilePlanDate EmpRoleCode City Location', function (err, products) {
           if (err) return next(err);
     console.log(products.length);
-    res.render('index', { title: 'index', indexpage:products});
+    //res.render('index', { title: 'index', indexpage:products});
+    res.render('delemployee', { title: 'del', indexpage:products});
     });
 };
 

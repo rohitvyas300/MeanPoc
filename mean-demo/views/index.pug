@@ -86,37 +86,21 @@ body
           tr
             th EmpNum
             th EmpName
-            th AssignAccount
-            th AgilePlanDate
+            th Role
             th EmpRoleCode
-            th City
+            th ActDesc
+            th EmpBandCode
             th Location
+            th City
         tbody
           each book in indexpage
             tr
               td #{book.EmpNum}
               td #{book.EmpName}
-              td #{book.AssignAccount}
-              td #{book.AgilePlanDate}
+              td #{book.Role}
               td #{book.EmpRoleCode}
-              td #{book.City}
+              td #{book.ActDesc}
+              td #{book.EmpBandCode}
               td #{book.Location}
+              td #{book.City}
 
-script. 
-  var doc = new jsPDF();
-  var specialElementHandlers = {
-  '#editor': function (element, renderer) {
-  return true;
-  }
-  };
-  $('#cmd').click(function () {
-  console.log('clicked in ');    
-  doc.fromHTML($('#content').html(), 15, 15, {
-  'width': 170,
-  'elementHandlers': specialElementHandlers
-  });
-  doc.save('C:\Users\agamj\Downloads\sample-file.pdf');
-  });
-
-footer
-  p Footer
