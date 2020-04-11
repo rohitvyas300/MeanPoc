@@ -25,6 +25,7 @@ exports.add_employee = function(req, res,next) {
 exports.delete_employee = function(req, res,next) {
   console.log("in sisde del acccillll");
   console.log(req.params._id);
+  //Employee.findOneAndDelete(req.params._id, req.body, function (err, products){
   Employee.findByIdAndRemove(req.params._id, req.body, function (err, products){
         if (err) return next(err);
         res.json(products);
@@ -185,7 +186,7 @@ exports.indexpage =  function(req, res, next) {
           if (err) return next(err);
     console.log(products.length);
     //res.render('index', { title: 'index', indexpage:products});
-    res.render('delemployee', { title: 'del', indexpage:products});
+    res.render('index', { title: 'Home Page', indexpage:products});
     });
 };
 

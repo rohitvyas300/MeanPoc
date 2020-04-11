@@ -11,7 +11,8 @@ router.get('/list', employee_controller.employee_list);
 // Add creating employee.
 router.post('/create', employee_controller.add_employee);
 // delete request for employee.
-router.delete('/delete/:_id',  employee_controller.delete_employee);
+//router.delete('/delete/:_id',  employee_controller.delete_employee);
+router.get('/delete',  employee_controller.delete_employee);
 // Update request for employee items.
 router.put('/update/:_id', employee_controller.update_employee);
 // month wise.
