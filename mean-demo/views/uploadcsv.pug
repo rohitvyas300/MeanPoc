@@ -1,0 +1,10 @@
+doctype html
+head
+  title Upload Data
+p
+  | Use the form below to upload CSV file.
+  form(action='/upload/data' method='post' enctype='multipart/form-data')
+    input(type='file' name='file' accept='*.csv')
+    br
+    br
+    input(type='submit' value='Upload csv')
