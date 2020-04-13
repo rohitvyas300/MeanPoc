@@ -18,41 +18,42 @@ exports.datatodb = function(req, res) {
       if (req.url == '/data') {
         var oldPath = files.file.path;
         var newPath = __dirname + '/file_upload/' + files.file.name;
+        console.log(newPath);
         fs.readFile(oldPath , function(err, data) {
             fs.writeFile(newPath, data, function(err) {
                 fs.unlink(oldPath, function(){
                     if(err) throw err;
-                    res.send("File uploaded to: " + newPath);
+                    //res.send("File uploaded to: " + newPath);
+
+                    console.log('this is 1223334444455...');
+                    csvtojson()
+                        .fromFile(newPath)
+                      //.fromFile("D://rohit//CertData//ER_Mar2.csv")
+                      .then(csvData => {
+                        //console.log(csvData);
+                    
+                        mongodb.connect(
+                          url,
+                          { useNewUrlParser: true, useUnifiedTopology: true },
+                          (err, client) => {
+                            if (err) throw err;
+                    
+                            client
+                              .db("readcsv_db")
+                              .collection("category")
+                              .insertMany(csvData, (err, res) => {
+                                if (err) throw err;
+                                //var count = res.length;
+                                console.log(res.insertedCount); 
+                                //console.log('Inserted: ${res.insertedCount} rows');
+                                client.close();
+                              });
+                          }
+                        );
+                      });
                 });
             }); 
         });
-    //}
-    console.log('this is 1223334444455...');
-csvtojson()
-    .fromFile(newpath)
-  //.fromFile("D://rohit//CertData//ER_Mar2.csv")
-  .then(csvData => {
-    //console.log(csvData);
-
-    mongodb.connect(
-      url,
-      { useNewUrlParser: true, useUnifiedTopology: true },
-      (err, client) => {
-        if (err) throw err;
-
-        client
-          .db("readcsv_db")
-          .collection("category")
-          .insertMany(csvData, (err, res) => {
-            if (err) throw err;
-            //var count = res.length;
-            console.log(res.insertedCount); 
-            //console.log('Inserted: ${res.insertedCount} rows');
-            client.close();
-          });
-      }
-    );
-  });
 }
 })
   res.redirect('/');
