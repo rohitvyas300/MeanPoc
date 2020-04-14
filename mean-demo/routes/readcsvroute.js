@@ -7,5 +7,7 @@ var employee_controller2 = require('../controllers/Readcsvcontroller');
 //FrontEnd routes
 router.get('/', employee_controller2.uploadPage);
 router.post('/data', employee_controller2.datatodb);
+router.get('/showuploadeddata', employee_controller2.showuploadeddata);
+
    
 module.exports = router;

@@ -132,8 +132,6 @@ exports.certificate_count_monthwise = function(req, res,next) {
 };
 
 
-
-
 // Display detail page for a specific book.
 exports.singleemployee_detail = function(req, res) {
   Employee.findById(req.params._id, req.body, function (err, products){
