@@ -62,4 +62,4 @@ EmpRoleCode : String,
  MultipleRatesAvailable : String
 });
 
-module.exports = mongoose.model('readcsv_db', readcsv_db);
+module.exports = mongoose.model('categories', readcsv_db,'category');
