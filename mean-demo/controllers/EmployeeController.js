@@ -176,15 +176,14 @@ exports.employee_detail = function(req, res) {
 };
 
 //FrontEnd--------------------------------------
-
 // Display detail page for a specific book.
 exports.indexpage =  function(req, res, next) {
   console.log("god is greater....");
   Employee.find(function (err, products) {
           if (err) return next(err);
     console.log(products.length);
-    //res.render('index', { title: 'index', indexpage:products});
     res.render('index', { title: 'Home Page', indexpage:products});
+   // res.render('tes', { title: 'index', indexpage:products});
     });
 };
 

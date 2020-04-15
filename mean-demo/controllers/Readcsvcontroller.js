@@ -5,13 +5,15 @@ const fs = require('fs');
 var mv = require('mv');
 var csvModel = require('../app/models/ReadCsvModel');
 
-exports.datatodb = function(req, res) {
+exports.datatodb = async function(req, res) {
   var form =  new formidable.IncomingForm().parse(req, (err, fields, files) => {
     if (err) {
       console.error('Error', err)
       throw err
     }
       if (req.url == '/data') {
+        //csvModel.collection.drop();
+
         var oldPath = files.file.path;
         var newPath = __dirname + '/file_upload/' + files.file.name;
         console.log(newPath);
@@ -42,31 +44,49 @@ exports.datatodb = function(req, res) {
         });
 }
 })
-  res.redirect('/upload/showuploadeddata');
+await res.redirect('/upload/showuploadeddata');
 };
-
 
 // Display detail page for a specific book.
 exports.uploadPage =  function(req, res) {
   console.log("god is greater....");
-  //mongodb.readcsv_db.find(function (err, products) {
-         // if (err) return next(err);
-    //console.log(products.length);
-    //res.render('index', { title: 'index', indexpage:products});
+  csvModel.collection.drop();  
     res.render('uploadcsv', { title: 'Home Page'});
   //  });
 };
 
-
-
 // Display detail page for a specific book.
 exports.showuploadeddata =  function(req, res, next) {
   console.log("Shri Sai Ram....");
-  csvModel.find(function (err, products) {
+    var perPage = 100
+    var page = req.query.page || 1
+    console.log('pageis '+page);
+    console.log(page);
+
+    csvModel
+        .find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function(err, products) {
+          csvModel.countDocuments().exec(function(err, count) {
+                if (err) return next(err)
+                console.log(count);  
+                //res.render('uploadedData', {
+                   res.render('tes', {
+                   products:products,
+                     pages: Math.ceil(count / perPage)
+                 })
+                //res.render('tes');
+            })
+        })
+
+/*
+  csvModel.find(function (err, products, next) {
           if (err) return next(err);
     console.log(products.length);
-    //res.render('index', { title: 'index', indexpage:products});
-    //res.render('index', { title: 'Home Page', indexpage:products});
-    res.json(products);
+    //res.json(products);
+    res.render('uploadedData', { title: 'Csvdata Page', indexpage:products});
     });
-};
+ */   
+  };
+
