@@ -6,6 +6,7 @@ var mv = require('mv');
 var csvModel = require('../app/models/ReadCsvModel');
 
 exports.datatodb = async function(req, res) {
+  csvModel.collection.drop();
   var form =  new formidable.IncomingForm().parse(req, (err, fields, files) => {
     if (err) {
       console.error('Error', err)
@@ -50,8 +51,9 @@ await res.redirect('/upload/showuploadeddata');
 // Display detail page for a specific book.
 exports.uploadPage =  function(req, res) {
   console.log("god is greater....");
-  csvModel.collection.drop();  
-    res.render('uploadcsv', { title: 'Home Page'});
+  //csvModel.collection.drop();  
+    //res.render('uploadcsv', { title: 'Home Page'});
+    res.render('uploadedData', { title: 'Home Page'});
   //  });
 };
 
@@ -62,7 +64,6 @@ exports.showuploadeddata =  function(req, res, next) {
     var page = req.query.page || 1
     console.log('pageis '+page);
     console.log(page);
-
     csvModel
         .find({})
         .skip((perPage * page) - perPage)
@@ -71,12 +72,11 @@ exports.showuploadeddata =  function(req, res, next) {
           csvModel.countDocuments().exec(function(err, count) {
                 if (err) return next(err)
                 console.log(count);  
-                //res.render('uploadedData', {
-                   res.render('tes', {
-                   products:products,
+                  res.render('uploadedData', {
+                  // res.render('tes', {
+                   dataUpload:products,
                      pages: Math.ceil(count / perPage)
                  })
-                //res.render('tes');
             })
         })
 

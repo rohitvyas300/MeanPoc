@@ -41,23 +41,12 @@ exports.update_employee = function(req, res,next) {
       });
 };
 
-// Display list based on date range.
-exports.employeeList_month1 = function(req, res) {
-  Employee.find({"AgileActualDate":{$gte:new Date('2020-01-01'), $lt:new Date("2020-01-23")}},'EmpNum JlEmail MasterCustomer AgilePlanDate',function (err, products) {
-    var count = products.length;
-    console.log(count);    
-    if (err) return next(err);
-        res.json(count);
-      });
-};
-
-
 // Display certification count based on date range.
 exports.certificate_count_monthwise = function(req, res,next) {
  // var fromdate = req.body.
   //var todate = req.query.enddate;
-  var fromdate = req.query.startdate;
-  var todate = req.query.enddate
+  var fromdate = req.query.startdate || '2020-01-01';
+  var todate = req.query.enddate || '2020-01-31';
   console.log(fromdate);
   console.log(todate);
   var count = {};
@@ -116,7 +105,7 @@ exports.certificate_count_monthwise = function(req, res,next) {
                                                           //console.log(count[2]);
 
                                                           //res.render('tes', { title: 'tes'});
-                                                          res.render('monthlycount', { title: 'monthlycount', count});
+                                                          res.render('monthlyPage', { title: 'monthlycount', count});
                                                         });
                                                     });
                                               });                                                
@@ -142,21 +131,6 @@ exports.singleemployee_detail = function(req, res) {
 
 
 // Display detail page for a specific book.
-exports.pugemployee =  function(req, res, next) {
-  console.log("god is great....");
-  console.log(req.query.EmpName);
-  if(req.query.EmpName == 'Rohit Vyas'){
-    Employee.find({ 'EmpName': 'Rohit Vyas' }, 'EmpNum EmpName AssignAccount AgilePlanDate EmpRoleCode City Location', function (err, products) {
-          if (err) return next(err);
-    console.log(products.length);
-    //res.render('monthlycount', { title: 'monthlycount', pugemployee:products});
-    res.render('tes', { title: 'tes'});
-      //res.json(products);
-    });
-  }
-};
-
-// Display detail page for a specific book.
 exports.employee_detail = function(req, res) {
     console.log("god is great....");
     console.log(req.query.EmpName);
@@ -180,22 +154,19 @@ exports.employee_detail = function(req, res) {
 exports.indexpage =  function(req, res, next) {
   console.log("god is greater....");
   Employee.find(function (err, products) {
-          if (err) return next(err);
+        if (err) return next(err);
     console.log(products.length);
     res.render('index', { title: 'Home Page', indexpage:products});
-   // res.render('tes', { title: 'index', indexpage:products});
     });
 };
 
 // Display detail page for a specific book.
 exports.monthlypage =  function(req, res) {
-  console.log("god is great....");
     res.render('monthlyPage', { title: 'monthhan'});
 };
 
 // Display detail page for a specific book.
 exports.addaccountpage =  function(req, res) {
-  console.log("god is great....");
     res.render('addaccountPage', { title: 'add'});
 };
 

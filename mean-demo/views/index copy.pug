@@ -3,106 +3,24 @@ head
   meta(charset='utf-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1')
-  title Uploaded Data
-  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css')
-  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-  //script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
-  //script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js')
-  //script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js')
-
+  title Certificate Portal
   link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto|Varela+Round')
   link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
   link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
   link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
   script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-
   style(type='text/css').
     body {
     color: #566787;
-    background: #05070a;
+    background: #f5f5f5;
     font-family: 'Varela Round', sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     }
-
-    .accordion .card {
-    color: #424e5d;
-    border: 1px solid #dddddd;
-    }
-    .accordion .card a {
-    color: #424e5d;
-    text-decoration: none;
-    }
-    .accordion .card-header {
-    background: linear-gradient(#fff, #f1f1f1);
-    padding: .75rem 1rem;
-    position: relative;
-    }
-    .accordion .card-header:hover {
-    background: linear-gradient(#f1f1f1, #e8e8e8);
-    }
-    .accordion .card-header h2 {
-    font-size: 2rem;
-    }
-    .accordion .fa {
-    width: 20px;
-    margin-right: .25rem;
-    }
-    .accordion .card-header a {
-    float: left;
-    width: 100%;
-    cursor: pointer;
-    }
-    .accordion .toggle {
-    font-size: .8rem;
-    line-height: .8rem;
-    cursor: pointer;
-    opacity: 0.7;
-    position: absolute;
-    right: 16px;
-    top: 16px;
-    width: 14px;
-    margin: 0;
-    }
-    .accordion .toggle:hover {
-    opacity: 1;
-    }
-    .accordion .card-body {
-    padding: 0;
-    }
-    .accordion .list-group-item {
-    border-radius: 0;
-    border-width: 1px 0 1px 0;
-    padding-left: 0px;
-    background: #d6dbe0;
-    font-weight: 500;
-    }
-    .accordion .list-group-item:hover {
-    background: #007bff;
-    }
-    .accordion .list-group-item:hover a {
-    color: #fff !important;
-    }
-    .accordion .list-group-item:hover .badge{
-    background: #fff;
-    color: #007bff;
-    }
-    .accordion .list-group-item a {
-    color: #61656b;
-    display: block;
-    }
-    .accordion .list-group-item .badge {
-    float: right;
-    min-width: 36px;
-    }
-    .accordion .rotate{
-    transform: rotate(180deg);
-    }
-    /* Table */
     .table-wrapper {
     background: #fff;
-    padding: 1px 1px;
-    margin: 10px 0;
+    padding: 20px 25px;
+    margin: 30px 0;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
     }
@@ -192,7 +110,6 @@ head
     vertical-align: middle;
     margin-right: 10px;
     }
-    /* Pagination */
     .pagination {
     float: right;
     margin: 0 0 5px;
@@ -313,7 +230,6 @@ head
     .modal form label {
     font-weight: normal;
     }
-
   script(type='text/javascript').
     $(document).ready(function(){
     // Activate tooltip
@@ -337,158 +253,74 @@ head
     }
     });
     });
-  script.
-    $(document).ready(function(){
-    // Toggle plus minus icon on show hide of collapse element
-    $(".collapse").on('show.bs.collapse', function(){
-    $(this).parent(".card").find(".toggle").addClass("rotate");
-    }).on('hide.bs.collapse', function(){
-    $(this).parent(".card").find(".toggle").removeClass("rotate");
-    });
-    });
-.container.mt-5
-  .row
-    .col-lg-3
-      #accordionExample.accordion.mb-2
-        .card
-          #headingOne.card-header
-            h2.mb-0
-              a(data-toggle='collapse' data-target='#collapseOne' aria-expanded='false' aria-controls='collapseOne')
-                span
-                  i.fa.fa-user
-                  |  Account
-                i.fa.fa-chevron-down.toggle
-          #collapseOne.collapse(aria-labelledby='headingOne' data-parent='#accordionExample')
-            .card-body
-              ul.list-group
-                li.list-group-item
-                  a(href='#')
-                    i.fa.fa-pencil
-                    |  Update Record
-                li.list-group-item
-                  a(href='#addEmployeeModal' data-toggle='modal')
-                    i.fa.fa-address-card
-                    |  Add Record
-                li.list-group-item
-                  a.text-danger(href='/upload')
-                    i.fa.fa-upload
-                    |  Upload CSV
-        .card
-          #headingThree.card-header
-            h2.mb-0
-              a(data-toggle='collapse' data-target='#collapseThree' aria-expanded='false' aria-controls='collapseThree')
-                span
-                  i.fa.fa-bar-chart
-                  |  Reports
-                i.fa.fa-chevron-down.toggle
-          #collapseThree.collapse(aria-labelledby='headingThree' data-parent='#accordionExample')
-            .card-body
-              ul.list-group
-                li.list-group-item
-                  a(href='monthlypage')
-                    i.fa.fa-certificate
-                    |  Yearly Count
-                li.list-group-item
-                  a(href='#')
-                    i.fa.fa-bar-chart
-                    |  DU Wise Count
-        .card
-          #headingFour.card-header
-            h2.mb-0
-              a(data-toggle='collapse' data-target='#collapseFour' aria-expanded='false' aria-controls='collapseFour')
-                span
-                  i.fa.fa-cog
-                  |  Settings
-                i.fa.fa-chevron-down.toggle
-          #collapseFour.collapse(aria-labelledby='headingFour' data-parent='#accordionExample')
-            .card-body
-              ul.list-group
-                li.list-group-item
-                  a(href='#')
-                    i.fa.fa-font
-                    |  Typography
-                li.list-group-item
-                  a(href='#')
-                    i.fa.fa-bell
-                    |  Notifications
-                li.list-group-item
-                  a(href='#')
-                    i.fa.fa-map
-                    |  Maps
-        .card
-          #headingFive.card-header
-            h2.mb-0
-              a(href='#')
-                i.fa.fa-power-off
-                |  Logout
-    .col-lg-9
-      .container
-      .table-wrapper
-      .table-title
-        .row
-          .col-sm-6
-            h2
-              | Uploaded 
-              b Data
-          .col-sm-6
-            a.btn.btn-danger(href='#deleteEmployeeModal' data-toggle='modal')
-              i.material-icons &#xE15C;
-              span Delete
-      table.table.table-striped.table-hover
-          thead
-            tr
-              th
-                span.custom-checkbox
-                  input#selectAll(type='checkbox')
-                  label(for='selectAll')
-                th EmpNum
-                th EmpName
-                th EmpRoleCode
-                th ActDesc
-                th Actions
-          tbody
-          each book in indexpage
-            tr
-              td
-                span.custom-checkbox
-                  input#checkbox1(type='checkbox' name='options[]' value='1')
-                  label(for='checkbox1')
-              td #{book.EmpNum}
-              td #{book.EmpName}
-              td #{book.Role}
-              td #{book.EmpRoleCode}
-              td
-                a.edit(href='#editEmployeeModal' data-toggle='modal')
-                  i.material-icons(data-toggle='tooltip' title='Edit') &#xE254;
-                a.delete(href='#deleteEmployeeModal' data-toggle='modal')
-                  i.material-icons(data-toggle='tooltip' title='Delete') &#xE872;
-      .clearfix
-        .hint-text 
-        ul.pagination
-          li.page-item.disabled
-            a.page-link(href='?page=1') First
-          li.page-item
-            a.page-link(href='?page=1') 1
-          li.page-item
-            a.page-link(href='?page=2') 2
-          li.page-item.active
-            a.page-link(href='?page=3') 3
-          li.page-item
-            a.page-link(href='?page=4') 4
-          li.page-item
-            a.page-link(href='?page=5') 5
-          li.page-item
-            a.page-link(href='?page=6') 6
-          li.page-item
-            a.page-link(href='?page=7') 7
-          li.page-item
-            a.page-link(href='?page=8') 8
-          li.page-item
-            a.page-link(href='?page=9') 9
-          li.page-item
-            a.page-link(href='?page=10') 10             
-          li.page-item
-            a.page-link(href='?page=8') Last
+.container
+  .table-wrapper
+    .table-title
+      .row
+        .col-sm-6
+          h2
+            | Manage 
+            b Employees
+        .col-sm-6
+          a.btn.btn-success(href='#addEmployeeModal' data-toggle='modal')
+            i.material-icons &#xE147;
+            span Add New Employee
+          a.btn.btn-danger(href='#deleteEmployeeModal' data-toggle='modal')
+            i.material-icons &#xE15C;
+            span Delete
+          a.btn.btn-success(href='monthlypage/' data-toggle='modal')
+            i.material-icons &#xE147;
+            span Month wise Count  
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th
+            span.custom-checkbox
+              input#selectAll(type='checkbox')
+              label(for='selectAll')
+            th EmpNum
+            th EmpName
+            th Role
+            th EmpRoleCode
+            th Actions
+      tbody
+      each book in indexpage
+        tr
+          td
+            span.custom-checkbox
+              input#checkbox1(type='checkbox' name='options[]' value='1')
+              label(for='checkbox1')
+          td #{book.EmpNum}
+          td #{book.EmpName}
+          td #{book.Role}
+          td #{book.EmpRoleCode}
+          td
+            a.edit(href='#editEmployeeModal' data-toggle='modal')
+              i.material-icons(data-toggle='tooltip' title='Edit') &#xE254;
+            a.delete(href='#deleteEmployeeModal' data-toggle='modal')
+              i.material-icons(data-toggle='tooltip' title='Delete') &#xE872;
+    .clearfix
+      .hint-text
+        | Showing 
+        b 5
+        |  out of 
+        b 25
+        |  entries
+      ul.pagination
+        li.page-item.disabled
+          a(href='#') Previous
+        li.page-item
+          a.page-link(href='#') 1
+        li.page-item
+          a.page-link(href='#') 2
+        li.page-item.active
+          a.page-link(href='#') 3
+        li.page-item
+          a.page-link(href='#') 4
+        li.page-item
+          a.page-link(href='#') 5
+        li.page-item
+          a.page-link(href='#') Next
 // Edit Modal HTML
 #addEmployeeModal.modal.fade
   .modal-dialog
@@ -744,4 +576,4 @@ head
             small This action cannot be undone.
         .modal-footer
           input.btn.btn-default(type='button' data-dismiss='modal' value='Cancel')
-          input.btn.btn-danger(type='submit' value='Delete')            
+          input.btn.btn-danger(type='submit' value='Delete')

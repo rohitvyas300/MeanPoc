@@ -13,7 +13,7 @@ head
   style(type='text/css').
     body {
     color: #566787;
-    background: #f5f5f5;
+    background: #05070a;
     font-family: 'Varela Round', sans-serif;
     font-size: 13px;
     }
@@ -40,7 +40,7 @@ head
     float: right;
     }
     .table-title .btn {
-    color: #fff;
+    color: #05070a;
     float: right;
     font-size: 13px;
     border: none;
@@ -262,6 +262,13 @@ head
             | Uploaded 
             b Data
         .col-sm-6
+          p
+            | Use the form below to upload CSV file.
+            form(action='/upload/data' method='post' enctype='multipart/form-data')
+              input(type='file' name='file' accept='*.csv')
+              br
+              br
+              input(type='submit' value='UploadCsv')
     table.table.table-striped.table-hover
       thead
         tr
@@ -275,7 +282,7 @@ head
             th EmpRoleCode
             th Actions
       tbody
-      each book in products
+      each book in dataUpload
         tr
           td
             span.custom-checkbox
@@ -318,259 +325,3 @@ head
           a.page-link(href='?page=10') 10             
         li.page-item
           a.page-link(href='?page=8') Last
-// Edit Modal HTML
-#addEmployeeModal.modal.fade
-  .modal-dialog
-    .modal-content
-      form#formmonth(name='month' method='post' action='/create/')
-        .modal-header
-          h4.modal-title Add Employee
-          button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
-        .modal-body
-          .form-group
-            h4 Employee Details
-            .input-group.input-group-icon
-            input(type='text' placeholder='Emp Number' name='EmpNum')
-            input(type='text' placeholder='Emp Name' name='EmpName')
-            .input-icon
-            i.fa.fa-user1
-            .input-group.input-group-icon
-            input(type='text' placeholder='Role' name='Role')
-            input(type='text' placeholder='Emp Role Code' name='EmpRoleCode')
-            .input-icon
-            i.fa.fa-user1
-            .input-group.input-group-icon
-            input(type='text' placeholder='Act Desc' name='ActDesc')
-            input(type='text' placeholder='Emp Band Code Num' name='EmpBandCode')
-            .input-icon
-            i.fa.fa-user1
-            .input-group.input-group-icon
-            input(type='text' placeholder='Location' name='Location')
-            input(type='text' placeholder='City' name='City')
-            .input-icon
-            i.fa.fa-user1
-            .input-group.input-group-icon
-            input(type='text' placeholder='Project Code' name='ProjectCode')
-            .input-icon
-            i.fa.fa-key3
-
-          .form-group
-            h4 Employer Details
-            .input-group.input-group-icon
-            input(type='text' placeholder='Source' name='Source')
-            input(type='text' placeholder='Assign Account' name='AssignAccount')
-            .input-icon
-            i.fa.fa-user1
-            .input-group.input-group-icon
-            input(type='text' placeholder='JlEmail' name='JlEmail')
-            input(type='text' placeholder='Master Customer' name='MasterCustomer')
-            .input-icon
-            i.fa.fa-user1
-            .input-group.input-group-icon
-            input(type='text' placeholder='Portfolio' name='Portfolio')
-            input(type='text' placeholder='DU' name='DU')
-            .input-icon
-            i.fa.fa-user1
-            .input-group.input-group-icon
-            input(type='text' placeholder='AccountSpoke' name='AccountSpoke')
-            input(type='text' placeholder='site' name='site')
-            .input-icon
-            i.fa.fa-user1
-
-          .form-group
-            h3 Certification Details
-          .input-group.input-group-icon
-            input(type='text' placeholder='Sdet Foundation' name='SdetFoundation')
-            input(type='text' placeholder='certis Completed Num' name='certisCompleted')
-            .input-icon
-            i.fa.fa-user1
-
-          .input-group.input-group-icon
-            input.textbox-n(placeholder='Fssf plan Date' name='FssFplanDate' type='text' onfocus="(this.type='date')")
-            input.textbox-n(placeholder='Fssf ActualDate' name='FssfActualDate' type='text' onfocus="(this.type='date')")
-          input(type='text' placeholder='Sdettag' name='Sdettag')
-          .input-icon
-          i.fa.fa-user1
-          h5 Agile
-          .input-group.input-group-icon
-            input(placeholder='Agile Plan Date' name='AgilePlanDate' type='text' onfocus="(this.type='date')")
-            input(placeholder='Agile Actual Date' name='AgileActualDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-              i.fa.fa-user1
-            .input-group.input-group-icon
-            input(placeholder='Agile Completion Date' name='AgileCompletionDate' type='text' onfocus="(this.type='date')")
-            input(type='text' placeholder='AgileStatus' name='AgileStatus')
-            .input-icon
-              i.fa.fa-user1
-          .input-group.input-group-icon
-            input(type='text' placeholder='Agile Certification Name' name='AgileCertificationName')
-            .input-icon
-              i.fa.fa-user1
-          h5 Automation Tool
-          .input-group.input-group-icon
-            input(type='text' placeholder='Automation Tool' name='AutomationTool')
-            input(type='text' placeholder='Status' name='AutomationToolStatus')
-            .input-icon
-              i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Plan Date' name='AutomationToolPlanDate' type='text' onfocus="(this.type='date')")
-            input(placeholder='Actual Date' name='AutomationToolActualDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-              i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Completion Date' name='AutomationToolCompletionDate' type='text' onfocus="(this.type='date')")
-            input(type='text' placeholder='Certification Name' name='AutomationToolCertificationName')
-            .input-icon
-              i.fa.fa-user1
-          h5 Programming Language
-          .input-group.input-group-icon
-            input(type='text' placeholder='Programming Language' name='ProgrammingLanguage')
-            input(type='text' placeholder='Status' name='PrgLangStatus')
-            .input-icon
-              i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Plan Date' name='PrgLangPlanDate' type='text' onfocus="(this.type='date')")
-            input(placeholder='Actual Date' name='PrgLangActualDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-              i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Completion Date' name='PrgLangCompletionDate' type='text' onfocus="(this.type='date')")
-            input(type='text' placeholder='Certification Name' name='ProgLangCertificationName')
-            .input-icon
-              i.fa.fa-user1
-          h5 DevOps
-          .input-group.input-group-icon
-            input(type='text' placeholder='DevOps Professional' name='DevOpsProfessional')
-            input(type='text' placeholder='Status' name='DevOpsStatus')
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Plan Date' name='DevOpsPlanDate' type='text' onfocus="(this.type='date')")
-            input(placeholder='Actual Date' name='DevOpsActualPlanDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Completion Date' name='DevOpsCompletionDate' type='text' onfocus="(this.type='date')")
-            input(type='text' placeholder='Certification Name' name='CertificationName')
-            .input-icon
-             i.fa.fa-user1
-          h5 BDD
-          .input-group.input-group-icon
-            input(type='text' placeholder='BDD Tool' name='BDDTool')
-            input(type='text' placeholder='Status' name='BDDStatus')
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Plan Date' name='BDDPlanDate' type='text' onfocus="(this.type='date')")
-            input(placeholder='Actual Date' name='BDDPActualPlanDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Completion Date' name='BDDCompletionDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          h5 Front End
-          .input-group.input-group-icon
-            input(type='text' placeholder='Front End Language' name='FrontEndLanguage')
-            input(type='text' placeholder='Status' name='FrontEndStatus')
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Plan Date' name='FrontPlanDate' type='text' onfocus="(this.type='date')")
-            input(placeholder='Actual Date' name='FrontActualPlanDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-              i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Completion Date' name='FrontCompletionDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-              i.fa.fa-user1
-          h5 Cloud
-          .input-group.input-group-icon
-            input(type='text' placeholder='Status' name='CloudStatus')
-            .input-icon
-              i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Plan Date' name='CloudPlanDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Actual Date' name='CloudActualPlanDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Completion Date' name='CloudCompletionDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          h5 API
-          .input-group.input-group-icon
-            input(type='text' placeholder='API' name='API')
-            input(type='text' placeholder='Status' name='APIStatus')
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Plan Date' name='APIPlanDate' type='text' onfocus="(this.type='date')")
-            input(placeholder='Actual Date' name='APIActualPlanDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Completion Date' name='APICompletionDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          h5 DB
-          .input-group.input-group-icon
-            input(type='text' placeholder='DB' name='DB')
-            input(type='text' placeholder='Status' name='DBStatus')
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Plan Date' name='DBPlanDate' type='text' onfocus="(this.type='date')")
-            input(placeholder='Actual Date' name='DBActualPlanDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-            input(placeholder='Completion Date' name='DBCompletionDate' type='text' onfocus="(this.type='date')")
-            .input-icon
-            i.fa.fa-user1
-          .input-group.input-group-icon
-        .modal-footer
-          input.btn.btn-default(type='button' data-dismiss='modal' value='Cancel')
-          input.btn.btn-success(type='submit' value='Add')
-// Edit Modal HTML
-#editEmployeeModal.modal.fade
-  .modal-dialog
-    .modal-content
-      form
-        .modal-header
-          h4.modal-title Edit Employee
-          button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
-        .modal-body
-          .form-group
-            label Name
-            input.form-control(type='text' required='')
-          .form-group
-            label Email
-            input.form-control(type='email' required='')
-          .form-group
-            label Address
-            textarea.form-control(required='')
-          .form-group
-            label Phone
-            input.form-control(type='text' required='')
-        .modal-footer
-          input.btn.btn-default(type='button' data-dismiss='modal' value='Cancel')
-          input.btn.btn-info(type='submit' value='Save')
-// Delete Modal HTML
-#deleteEmployeeModal.modal.fade
-  .modal-dialog
-    .modal-content
-      form#deleteEmp(name='delemployee' method='get' action='/delete/')
-        .modal-header
-          h4.modal-title Delete Employee
-          button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
-        .modal-body
-          p Are you sure you want to delete these Records?
-          p.text-warning
-            small This action cannot be undone.
-        .modal-footer
-          input.btn.btn-default(type='button' data-dismiss='modal' value='Cancel')
-          input.btn.btn-danger(type='submit' value='Delete')
