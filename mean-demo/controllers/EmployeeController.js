@@ -23,12 +23,10 @@ exports.add_employee = function(req, res,next) {
 
 // DELETE an employee.
 exports.delete_employee = function(req, res,next) {
-  console.log("in sisde del acccillll");
-  console.log(req.params._id);
   //Employee.findOneAndDelete(req.params._id, req.body, function (err, products){
-  Employee.findByIdAndRemove(req.params._id, req.body, function (err, products){
+  Employee.findByIdAndRemove(req.query.custId, req.body, function (err, products){
         if (err) return next(err);
-        res.json(products);
+        res.redirect('/');
       });
 };
 
@@ -123,6 +121,8 @@ exports.certificate_count_monthwise = function(req, res,next) {
 
 // Display detail page for a specific book.
 exports.singleemployee_detail = function(req, res) {
+  // var tt = req.query.custId;
+  // console.log(tt);
   Employee.findById(req.params._id, req.body, function (err, products){
           if (err) return next(err);
             res.json(products);
