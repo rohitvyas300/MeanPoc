@@ -462,8 +462,7 @@ head
               th
                 span.custom-checkbox
                   input#selectAll(type='checkbox')
-                  label(for='selectAll')
-                th Id 
+                  label(for='selectAll') 
                 th EmpNum
                 th EmpName
                 th EmpRoleCode
@@ -475,12 +474,11 @@ head
               td
                 span.custom-checkbox
                   input#checkbox1(type='checkbox' name='options[]' value='#{book._id}')
-                  label(for='checkbox1')
-              td #{book._id}  
+                  label(for='checkbox1')  
               td #{book.EmpNum}
               td #{book.EmpName}
-              td #{book.Role}
               td #{book.EmpRoleCode}
+              td #{book.ActDesc}
               td
                 a.edit(href='#editEmployeeModal' data-toggle='modal')
                   i.material-icons(data-toggle='tooltip' title='Edit') &#xE254;      
@@ -498,7 +496,7 @@ head
             a.page-link(href='?page=1') 1
           li.page-item
             a.page-link(href='?page=2') 2
-          li.page-item.active
+          li.page-item
             a.page-link(href='?page=3') 3
           li.page-item
             a.page-link(href='?page=4') 4

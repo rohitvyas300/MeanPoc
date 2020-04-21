@@ -57,6 +57,7 @@ exports.uploadPage =  function(req, res) {
   //  });
 };
 
+/*
 // Display detail page for a specific book.
 exports.showuploadeddata =  function(req, res, next) {
   console.log("Shri Sai Ram....");
@@ -78,15 +79,36 @@ exports.showuploadeddata =  function(req, res, next) {
                      pages: Math.ceil(count / perPage)
                  })
             })
-        })
-
-/*
-  csvModel.find(function (err, products, next) {
-          if (err) return next(err);
-    console.log(products.length);
-    //res.json(products);
-    res.render('uploadedData', { title: 'Csvdata Page', indexpage:products});
-    });
- */   
+        })   
   };
+  */
 
+
+// Display detail page for a specific book.
+exports.showuploadeddata =  function(req, res, next) {
+  console.log("Shri Sai Ram....");
+    var perPage = 10
+    var page = req.query.page || 1
+    console.log('pageis '+page);
+    console.log(page);
+    csvModel
+        .find({"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1"]}})
+        .exec(function(err, products) {   
+        // Get the companies whose founders are in that set.
+        csvModel.find( { $and: [ {CurrentCity: {$in: ["CHENNAI","PUNE"]}}, {"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1"]}}]})
+    //csvModel.find({CurrentCity: {$in: ["CHENNAI","PUNE"]}},{"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1"]}})
+    .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function(err, docs) {
+          csvModel.countDocuments().exec(function(err, count) {
+                if (err) return next(err)
+                console.log(count);  
+                  res.render('uploadedData', {
+                  // res.render('tes', {
+                   dataUpload:docs,
+                     pages: Math.ceil(count / perPage)
+                 })
+            })
+        });
+      });   
+ };

@@ -153,11 +153,30 @@ exports.employee_detail = function(req, res) {
 // Display detail page for a specific book.
 exports.indexpage =  function(req, res, next) {
   console.log("god is greater....");
-  Employee.find(function (err, products) {
-        if (err) return next(err);
-    console.log(products.length);
-    res.render('index', { title: 'Home Page', indexpage:products});
-    });
+    var perPage = 10
+    var page = req.query.page || 1
+    console.log('pageis '+page);
+    console.log(page);
+    Employee.find()
+    .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function(err, products) {
+          Employee.countDocuments().exec(function(err, count) {
+                if (err) return next(err)
+                console.log(count);  
+                  res.render('index', {
+                  // res.render('tes', {
+                    indexpage:products,
+                     pages: Math.ceil(count / perPage)
+                 })
+            })
+        });
+
+  // Employee.find(function (err, products) {
+  //       if (err) return next(err);
+  //   console.log(products.length);
+  //   res.render('index', { title: 'Home Page', indexpage:products});
+  //   });
 };
 
 // Display detail page for a specific book.
