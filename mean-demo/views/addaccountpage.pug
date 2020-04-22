@@ -1,146 +1,275 @@
 doctype html
 head
-  title Index Page
   meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1')
+  title
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+  //script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+  //script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js')
+  //script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js')
+
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto|Varela+Round')
+  link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  //script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+
+  style(type='text/css').
+    body {
+    color: #566787;
+    background: #E6E6FA;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 15px;
+    }
+    /* Modal styles */
+    .modal .modal-dialog {
+    max-width: 500px;
+    }
+    .modal .modal-header, .modal .modal-body, .modal .modal-footer {
+    padding: 20px 30px;
+    }
+    .modal .modal-content {
+    border-radius: 3px;
+    }
+    .modal .modal-footer {
+    background: #ecf0f1;
+    border-radius: 0 0 3px 3px;
+    }
+    .modal .modal-title {
+    display: inline-block;
+    }
+    .modal .form-control {
+    border-radius: 2px;
+    box-shadow: none;
+    border-color: #dddddd;
+    }
+    .modal textarea.form-control {
+    resize: vertical;
+    }
+    .modal .btn {
+    border-radius: 2px;
+    min-width: 100px;
+    }
+    .modal form label {
+    font-weight: normal;
+    }
 .container
-  form#formmonth(name='month' method='post' action='/create/')
-    .row
-      h4 Employee Details
-      .input-group.input-group-icon
-        input(type='text' placeholder='Emp Number' name='EmpNum')
-        input(type='text' placeholder='Emp Name' name='EmpName')
-        .input-icon
-          i.fa.fa-user1
-      .input-group.input-group-icon
-        input(type='text' placeholder='Role' name='Role')
-        input(type='text' placeholder='Emp Role Code' name='EmpRoleCode')
-        .input-icon
-          i.fa.fa-envelope
-      .input-group.input-group-icon
-        input(type='text' placeholder='Act Desc' name='ActDesc')
-        input(type='text' placeholder='Emp Band Code' name='EmpBandCode')
-        .input-icon
-          i.fa.fa-key1
-      .input-group.input-group-icon
-        input(type='text' placeholder='Location' name='Location')
-        input(type='text' placeholder='City' name='City')
-        .input-icon
-          i.fa.fa-key2
-      .input-group.input-group-icon
-        input(type='text' placeholder='Project Code' name='ProjectCode')
-        .input-icon
-          i.fa.fa-key3
-    .row
-      h4 Employer Details
-      .input-group
-        .col-third
-        .col-third
-          input(type='text' placeholder='Source' name='Source')
-          input(type='text' placeholder='Assign Account' name='AssignAccount')
-        .col-third
-          input(type='text' placeholder='JlEmail' name='JlEmail')
-          input(type='text' placeholder='Master Customer' name='MasterCustomer')
-        .col-third
-          input(type='text' placeholder='Portfolio' name='Portfolio')
-          input(type='text' placeholder='DU' name='DU')
-        .col-third
-          input(type='text' placeholder='AccountSpoke' name='AccountSpoke')
-          input(type='text' placeholder='site' name='site')
-    .row
-      .col-half
-        h3 Certification Details
-        .input-group
-          .col-third
-            input(type='text' placeholder='Sdet Foundation' name='SdetFoundation')
-            input(type='text' placeholder='certis Completed' name='certisCompleted')
-          .col-third
-            input.textbox-n(placeholder='Fssf plan Date' name='FssFplanDate' type='text' onfocus="(this.type='date')")
-            input.textbox-n(placeholder='Fssf ActualDate' name='FssfActualDate' type='text' onfocus="(this.type='date')")
+  .row
+    .col-md-10.col-md-offset-1.m-auto
+      .contact-form
+        h1 Edit Records
+        p.hint-text
+        form#editEmp(name='update' method='get' action='/update')
+          .modal-header
+          button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+          .modal-body
+          .form-group
+            h4 Employee Details
+            .input-group.input-group-icon
+            input#custId(type='hidden' name= 'custId' value= singleRecordData._id)
+            input(type='text' placeholder='Emp Number' name='EmpNum' value= singleRecordData.EmpNum)
+            input(type='text' placeholder='Emp Name' name='EmpName' value= singleRecordData.EmpName)
+            .input-icon
+            i.fa.fa-user1
+            .input-group.input-group-icon
+            input(type='text' placeholder='Role' name='Role' value= singleRecordData.Role)
+            input(type='text' placeholder='Emp Role Code' name='EmpRoleCode' value=singleRecordData.EmpRoleCode)
+            .input-icon
+            i.fa.fa-user1
+            .input-group.input-group-icon
+            input(type='text' placeholder='Act Desc' name='ActDesc' value=singleRecordData.ActDesc)
+            input(type='text' placeholder='Emp Band Code Num' name='EmpBandCode' value=singleRecordData.EmpBandCode)
+            .input-icon
+            i.fa.fa-user1
+            .input-group.input-group-icon
+            input(type='text' placeholder='Location' name='Location' value=singleRecordData.Location)
+            input(type='text' placeholder='City' name='City' value=singleRecordData.City)
+            .input-icon
+            i.fa.fa-user1
+            .input-group.input-group-icon
+            input(type='text' placeholder='Project Code' name='ProjectCode' value=singleRecordData.ProjectCode)
+            .input-icon
+            i.fa.fa-key3
+          .form-group
+            h4 Employer Details
+            .input-group.input-group-icon
+            input(type='text' placeholder='Source' name='Source' value=singleRecordData.Source )
+            input(type='text' placeholder='Assign Account' name='AssignAccount' value=singleRecordData.AssignAccount )
+            .input-icon
+            i.fa.fa-user1
+            .input-group.input-group-icon
+            input(type='text' placeholder='JlEmail' name='JlEmail' value=singleRecordData.JlEmail)
+            input(type='text' placeholder='Master Customer' name='MasterCustomer' value=singleRecordData.MasterCustomer)
+            .input-icon
+            i.fa.fa-user1
+            .input-group.input-group-icon
+            input(type='text' placeholder='Portfolio' name='Portfolio' value=singleRecordData.Portfolio)
+            input(type='text' placeholder='DU' name='DU' value=singleRecordData.DU)
+            .input-icon
+            i.fa.fa-user1
+            .input-group.input-group-icon
+            input(type='text' placeholder='AccountSpoke' name='AccountSpoke' value=singleRecordData.AccountSpoke)
+            input(type='text' placeholder='site' name='site' value=singleRecordData.site)
+            .input-icon
+            i.fa.fa-user1
+          .form-group
+            h3 Certification Details
+          .input-group.input-group-icon
+            input(type='text' placeholder='Sdet Foundation' name='SdetFoundation' value=singleRecordData.SdetFoundation)
+            input(type='text' placeholder='certis Completed Num' name='certisCompleted' value=singleRecordData.certisCompleted)
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input.textbox-n(placeholder='Fssf plan Date' name='FssFplanDate' type='text' value=singleRecordData.FssFplanDate onfocus="(this.type='date')")
+            input.textbox-n(placeholder='Fssf ActualDate' name='FssfActualDate' type='text' value=singleRecordData.FssfActualDate onfocus="(this.type='date')")
           input(type='text' placeholder='Sdettag' name='Sdettag')
-        h5 Agile
-        .col-third
-          input(placeholder='Agile Plan Date' name='AgilePlanDate' type='text' onfocus="(this.type='date')")
-          input(placeholder='Agile Actual Date' name='AgileActualDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Agile Completion Date' name='AgileCompletionDate' type='text' onfocus="(this.type='date')")
-          input(type='text' placeholder='AgileStatus' name='AgileStatus')
-        .col-third
-          input(type='text' placeholder='Agile Certification Name' name='AgileCertificationName')
-        h5 Automation Tool
-        .col-third
-          input(type='text' placeholder='Automation Tool' name='AutomationTool')
-          input(type='text' placeholder='Status' name='AutomationToolStatus')
-        .col-third
-          input(placeholder='Plan Date' name='AutomationToolPlanDate' type='text' onfocus="(this.type='date')")
-          input(placeholder='Actual Date' name='AutomationToolActualDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Completion Date' name='AutomationToolCompletionDate' type='text' onfocus="(this.type='date')")
-          input(type='text' placeholder='Certification Name' name='AutomationToolCertificationName')
-        h5 Programming Language
-        .col-third
-          input(type='text' placeholder='Programming Language' name='ProgrammingLanguage')
-          input(type='text' placeholder='Status' name='PrgLangStatus')
-        .col-third
-          input(placeholder='Plan Date' name='PrgLangPlanDate' type='text' onfocus="(this.type='date')")
-          input(placeholder='Actual Date' name='PrgLangActualDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Completion Date' name='PrgLangCompletionDate' type='text' onfocus="(this.type='date')")
-          input(type='text' placeholder='Certification Name' name='ProgLangCertificationName')
-        h5 DevOps
-        .col-third
-          input(type='text' placeholder='DevOps Professional' name='DevOpsProfessional')
-          input(type='text' placeholder='Status' name='DevOpsStatus')
-        .col-third
-          input(placeholder='Plan Date' name='DevOpsPlanDate' type='text' onfocus="(this.type='date')")
-          input(placeholder='Actual Date' name='DevOpsActualPlanDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Completion Date' name='DevOpsCompletionDate' type='text' onfocus="(this.type='date')")
-          input(type='text' placeholder='Certification Name' name='CertificationName')
-        h5 BDD
-        .col-third
-          input(type='text' placeholder='BDD Tool' name='BDDTool')
-          input(type='text' placeholder='Status' name='BDDStatus')
-        .col-third
-          input(placeholder='Plan Date' name='BDDPlanDate' type='text' onfocus="(this.type='date')")
-          input(placeholder='Actual Date' name='BDDPActualPlanDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Completion Date' name='BDDCompletionDate' type='text' onfocus="(this.type='date')")
-        h5 Front End
-        .col-third
-          input(type='text' placeholder='Front End Language' name='FrontEndLanguage')
-          input(type='text' placeholder='Status' name='FrontEndStatus')
-        .col-third
-          input(placeholder='Plan Date' name='FrontPlanDate' type='text' onfocus="(this.type='date')")
-          input(placeholder='Actual Date' name='FrontActualPlanDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Completion Date' name='FrontCompletionDate' type='text' onfocus="(this.type='date')")
-        h5 Cloud
-        .col-third
-          input(type='text' placeholder='Status' name='CloudStatus')
-        .col-third
-          input(placeholder='Plan Date' name='CloudPlanDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Actual Date' name='CloudActualPlanDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Completion Date' name='CloudCompletionDate' type='text' onfocus="(this.type='date')")
-        h5 API
-        .col-third
-          input(type='text' placeholder='API' name='API')
-          input(type='text' placeholder='Status' name='APIStatus')
-        .col-third
-          input(placeholder='Plan Date' name='APIPlanDate' type='text' onfocus="(this.type='date')")
-          input(placeholder='Actual Date' name='APIActualPlanDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Completion Date' name='APICompletionDate' type='text' onfocus="(this.type='date')")
-        h5 DB
-        .col-third
-          input(type='text' placeholder='DB' name='DB')
-          input(type='text' placeholder='Status' name='DBStatus')
-        .col-third
-          input(placeholder='Plan Date' name='DBPlanDate' type='text' onfocus="(this.type='date')")
-          input(placeholder='Actual Date' name='DBActualPlanDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          input(placeholder='Completion Date' name='DBCompletionDate' type='text' onfocus="(this.type='date')")
-        .col-third
-          button#btnSubmit(type='submit') Submit
+          .input-icon
+          i.fa.fa-user1
+          h5 Agile
+          .input-group.input-group-icon
+            input(placeholder='Agile Plan Date' name='AgilePlanDate' type='text' value=singleRecordData.AgilePlanDate onfocus="(this.type='date')")
+            input(placeholder='Agile Actual Date' name='AgileActualDate' type='text' value=singleRecordData.AgileActualDate onfocus="(this.type='date')")
+            .input-icon
+              i.fa.fa-user1
+            .input-group.input-group-icon
+            input(placeholder='Agile Completion Date' name='AgileCompletionDate' type='text' value=singleRecordData.AgileCompletionDate onfocus="(this.type='date')")
+            input(type='text' placeholder='AgileStatus' name='AgileStatus' value=singleRecordData.AgileStatus)
+            .input-icon
+              i.fa.fa-user1
+          .input-group.input-group-icon
+            input(type='text' placeholder='Agile Certification Name' name='AgileCertificationName' value=singleRecordData.AgileCertificationName)
+            .input-icon
+              i.fa.fa-user1
+          h5 Automation Tool
+          .input-group.input-group-icon
+            input(type='text' placeholder='Automation Tool' name='AutomationTool' value=singleRecordData.AutomationTool)
+            input(type='text' placeholder='Status' name='AutomationToolStatus' value=singleRecordData.AutomationToolStatus)
+            .input-icon
+              i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Plan Date' name='AutomationToolPlanDate' type='text' value=singleRecordData.AutomationToolPlanDate onfocus="(this.type='date')")
+            input(placeholder='Actual Date' name='AutomationToolActualDate' type='text' value=singleRecordData.AutomationToolActualDate onfocus="(this.type='date')")
+            .input-icon
+              i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Completion Date' name='AutomationToolCompletionDate' type='text' value=singleRecordData.AutomationToolCompletionDate onfocus="(this.type='date')")
+            input(type='text' placeholder='Certification Name' name='AutomationToolCertificationName' value=singleRecordData.AutomationToolCertificationName)
+            .input-icon
+              i.fa.fa-user1
+          h5 Programming Language
+          .input-group.input-group-icon
+            input(type='text' placeholder='Programming Language' name='ProgrammingLanguage' value=singleRecordData.ProgrammingLanguage)
+            input(type='text' placeholder='Status' name='PrgLangStatus' value=singleRecordData.PrgLangStatus)
+            .input-icon
+              i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Plan Date' name='PrgLangPlanDate' type='text' value=singleRecordData.PrgLangPlanDate onfocus="(this.type='date')")
+            input(placeholder='Actual Date' name='PrgLangActualDate' type='text' value=singleRecordData.PrgLangActualDate onfocus="(this.type='date')")
+            .input-icon
+              i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Completion Date' name='PrgLangCompletionDate' type='text' value=singleRecordData.PrgLangCompletionDate onfocus="(this.type='date')")
+            input(type='text' placeholder='Certification Name' name='ProgLangCertificationName' value=singleRecordData.ProgLangCertificationName)
+            .input-icon
+              i.fa.fa-user1
+          h5 DevOps
+          .input-group.input-group-icon
+            input(type='text' placeholder='DevOps Professional' name='DevOpsProfessional' value=singleRecordData.DevOpsProfessional)
+            input(type='text' placeholder='Status' name='DevOpsStatus' value=singleRecordData.DevOpsStatus)
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Plan Date' name='DevOpsPlanDate' type='text' value=singleRecordData.DevOpsPlanDate onfocus="(this.type='date')")
+            input(placeholder='Actual Date' name='DevOpsActualPlanDate' type='text' value=singleRecordData.DevOpsActualPlanDate onfocus="(this.type='date')")
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Completion Date' name='DevOpsCompletionDate' type='text' value=singleRecordData.DevOpsCompletionDate onfocus="(this.type='date')")
+            input(type='text' placeholder='Certification Name' name='CertificationName' value=singleRecordData.CertificationName)
+            .input-icon
+             i.fa.fa-user1
+          h5 BDD
+          .input-group.input-group-icon
+            input(type='text' placeholder='BDD Tool' name='BDDTool' value=singleRecordData.BDDTool)
+            input(type='text' placeholder='Status' name='BDDStatus' value=singleRecordData.BDDStatus)
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Plan Date' name='BDDPlanDate' type='text' value=singleRecordData.BDDPlanDate onfocus="(this.type='date')")
+            input(placeholder='Actual Date' name='BDDPActualPlanDate' type='text' value=singleRecordData.BDDPActualPlanDate onfocus="(this.type='date')")
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Completion Date' name='BDDCompletionDate' type='text' value=singleRecordData.BDDCompletionDate onfocus="(this.type='date')")
+            .input-icon
+            i.fa.fa-user1
+          h5 Front End
+          .input-group.input-group-icon
+            input(type='text' placeholder='Front End Language' name='FrontEndLanguage' value=singleRecordData.FrontEndLanguage)
+            input(type='text' placeholder='Status' name='FrontEndStatus' value=singleRecordData.FrontEndStatus)
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Plan Date' name='FrontPlanDate' type='text' value=singleRecordData.FrontPlanDate onfocus="(this.type='date')")
+            input(placeholder='Actual Date' name='FrontActualPlanDate' type='text' value=singleRecordData.FrontActualPlanDate onfocus="(this.type='date')")
+            .input-icon
+              i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Completion Date' name='FrontCompletionDate' type='text' value=singleRecordData.FrontCompletionDate onfocus="(this.type='date')" )
+            .input-icon
+              i.fa.fa-user1
+          h5 Cloud
+          .input-group.input-group-icon
+            input(type='text' placeholder='Status' name='CloudStatus' value=singleRecordData.CloudStatus)
+            .input-icon
+              i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Plan Date' name='CloudPlanDate' type='text' value=singleRecordData.CloudPlanDate onfocus="(this.type='date')" )
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Actual Date' name='CloudActualPlanDate' type='text' value=singleRecordData.CloudActualPlanDate onfocus="(this.type='date')" )
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Completion Date' name='CloudCompletionDate' type='text' value=singleRecordData.CloudCompletionDate onfocus="(this.type='date')" )
+            .input-icon
+            i.fa.fa-user1
+          h5 API
+          .input-group.input-group-icon
+            input(type='text' placeholder='API' name='API' value=singleRecordData.API)
+            input(type='text' placeholder='Status' name='APIStatus' value=singleRecordData.APIStatus)
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Plan Date' name='APIPlanDate' type='text' value=singleRecordData.APIPlanDate onfocus="(this.type='date')")
+            input(placeholder='Actual Date' name='APIActualPlanDate' type='text' value=singleRecordData.APIActualPlanDate onfocus="(this.type='date')")
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Completion Date' name='APICompletionDate' type='text' value=singleRecordData.APICompletionDate onfocus="(this.type='date')")
+            .input-icon
+            i.fa.fa-user1
+          h5 DB
+          .input-group.input-group-icon
+            input(type='text' placeholder='DB' name='DB' value=singleRecordData.DB)
+            input(type='text' placeholder='Status' name='DBStatus' value=singleRecordData.DBStatus)
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            input(placeholder='Plan Date' name='DBPlanDate' type='text' value=singleRecordData.DBPlanDate onfocus="(this.type='date')")
+            input(placeholder='Actual Date' name='DBActualPlanDate' type='text' value=singleRecordData.DBActualPlanDate onfocus="(this.type='date')")
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+            i.fa.fa-user1
+            input(placeholder='Completion Date' name='DBCompletionDate' type='text' value=singleRecordData.DBCompletionDate onfocus="(this.type='date')")
+            .input-icon
+            i.fa.fa-user1
+          .input-group.input-group-icon
+          input.btn.btn-default(type='button' data-dismiss='modal' value='Cancel')
+          input.btn.btn-success(type='submit' value='Update')

@@ -480,7 +480,9 @@ head
               td #{book.EmpRoleCode}
               td #{book.ActDesc}
               td
-                a.edit(href='#editEmployeeModal' data-toggle='modal')
+                form#editEmp(name='update' method='get' action='/singleUpdate')
+                 input#custId(type='hidden' name= 'custId' value= book._id)
+                 button.btnSubmit(type='update' data-toggle='modal')
                   i.material-icons(data-toggle='tooltip' title='Edit') &#xE254;      
                 form#deleteEmp(name='delemployee2' method='get' action='/delete')
                   input#custId(type='hidden' name= 'custId' value= book._id)
@@ -735,7 +737,7 @@ head
 #editEmployeeModal.modal.fade
   .modal-dialog
     .modal-content
-      form
+      form 
         .modal-header
           h4.modal-title Edit Employee
           button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;

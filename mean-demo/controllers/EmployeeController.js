@@ -33,9 +33,12 @@ exports.delete_employee = function(req, res,next) {
 
 // UPDATE an employee.
 exports.update_employee = function(req, res,next) {
-  Employee.findByIdAndUpdate(req.params._id, req.body, function (err, products){
+  console.log('upsdata isiss');
+  console.log(req.query.EmpName);
+  console.log(req.query.custId);
+  Employee.findByIdAndUpdate(req.query.custId, req.query, function (err, products){
         if (err) return next(err);
-        res.json(products);
+        res.redirect('/');
       });
 };
 
@@ -171,12 +174,6 @@ exports.indexpage =  function(req, res, next) {
                  })
             })
         });
-
-  // Employee.find(function (err, products) {
-  //       if (err) return next(err);
-  //   console.log(products.length);
-  //   res.render('index', { title: 'Home Page', indexpage:products});
-  //   });
 };
 
 // Display detail page for a specific book.
@@ -187,6 +184,16 @@ exports.monthlypage =  function(req, res) {
 // Display detail page for a specific book.
 exports.addaccountpage =  function(req, res) {
     res.render('addaccountPage', { title: 'add'});
+};
+
+// Display detail page for a specific book.
+exports.singleRecordUpdate_detail = function(req, res) {
+   var tt = req.query.custId;
+   console.log(tt);
+  Employee.findById(req.query.custId, req.body, function (err, products){
+          if (err) return next(err);
+          res.render('addaccountPage', {'singleRecordData': products});
+      });
 };
 
 
