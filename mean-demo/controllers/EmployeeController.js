@@ -106,7 +106,7 @@ exports.certificate_count_monthwise = function(req, res,next) {
                                                           //console.log(count[2]);
 
                                                           //res.render('tes', { title: 'tes'});
-                                                          res.render('monthlyPage', { title: 'monthlycount', count});
+                                                          res.render('monthlyPage', { title: 'monthlyPage', count});
                                                         });
                                                     });
                                               });                                                

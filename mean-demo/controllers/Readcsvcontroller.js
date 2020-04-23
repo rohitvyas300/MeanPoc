@@ -92,7 +92,7 @@ exports.showuploadeddata =  function(req, res, next) {
     console.log('pageis '+page);
     console.log(page);
     csvModel
-        .find({"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1"]}})
+        .find({"EmpDU" : { $in : ["IVS-DEVOPDU3"]}})
         .exec(function(err, products) {   
         // Get the companies whose founders are in that set.
         csvModel.find( { $and: [ {CurrentCity: {$in: ["CHENNAI","PUNE"]}}, {"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1"]}}]})
