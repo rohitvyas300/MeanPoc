@@ -4,6 +4,7 @@ const formidable = require('formidable');
 const fs = require('fs');
 var mv = require('mv');
 var csvModel = require('../app/models/ReadCsvModel');
+//var csvModel = require('../app/models/EmployeeDetails');
 
 exports.datatodb = async function(req, res) {
   csvModel.collection.drop();

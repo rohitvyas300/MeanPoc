@@ -25,5 +25,6 @@ router.get('/', employee_controller.indexpage);
 router.get('/monthlypage', employee_controller.certificate_count_monthwise);
 router.get('/addaccount', employee_controller.addaccountpage);
 router.get('/singleUpdate', employee_controller.singleRecordUpdate_detail);
+router.get('/tes', employee_controller.test);
    
 module.exports = router;

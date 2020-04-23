@@ -1,4 +1,5 @@
 var Employee = require('../app/models/EmployeeDetails');
+var db = require('../config/db');
 
 // Display list of all Employee records.
 exports.employee_list = function(req, res) {
@@ -42,84 +43,107 @@ exports.update_employee = function(req, res,next) {
       });
 };
 
+// UPDATE an employee.
+exports.test = function(req, res,next) {
+  
+  db.collection('employee').aggregate( [
+    {
+      $addFields: {
+        totalHomework: { $sum: "$AgilePlanDate" } ,
+        totalQuiz: { $sum: "$AgileActualDate" }
+      }
+    },
+    {
+      $addFields: { totalScore:
+        { $add: [ "$totalHomework", "$totalQuiz", "$extraCredit" ] } }
+    }
+ ] )
+};
+
 // Display certification count based on date range.
 exports.certificate_count_monthwise = function(req, res,next) {
- // var fromdate = req.body.
-  //var todate = req.query.enddate;
-  var fromdate = req.query.startdate || '2020-01-01';
-  var todate = req.query.enddate || '2020-01-31';
-  console.log(fromdate);
-  console.log(todate);
-  var count = {};
-  Employee.find({"AgilePlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}},function (err, AgilePlanDate) {
-    if (err) return next(err);
-    count.AgilePlanDate = AgilePlanDate.length;
-        
-        Employee.find({"AgileActualDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AgileActualDate) {
-        if (err) return next(err);
-        count.AgileActualDate = AgileActualDate.length;
-      
-               Employee.find({"AgileCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AgileCompletionDate) {
-                if (err) return next(err);
-                count.AgileCompletionDate = AgileCompletionDate.length;
-
-                    Employee.find({"AutomationToolPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AutomationToolPlanDate) {
-                      if (err) return next(err);
-                      count.AutomationToolPlanDate = AutomationToolPlanDate.length;
-
-                          Employee.find({"AutomationToolActualDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AutomationToolActualDate) {
-                          if (err) return next(err);
-                          count.AutomationToolActualDate = AutomationToolActualDate.length;
-
-                              Employee.find({"AutomationToolCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AutomationToolCompletionDate) {
-                                if (err) return next(err);
-                                count.AutomationToolCompletionDate = AutomationToolCompletionDate.length;
-
-                                    Employee.find({"PrgLangPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangPlanDate) {
-                                    if (err) return next(err);
-                                    count.PrgLangPlanDate = PrgLangPlanDate.length;
-
-                                        Employee.find({"PrgLangActualDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangActualDate) {
-                                        if (err) return next(err);
-                                        count.PrgLangActualDate = PrgLangActualDate.length;
-
-                                            Employee.find({"PrgLangCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangCompletionDate) {
-                                            if (err) return next(err);
-                                            count.PrgLangCompletionDate = PrgLangCompletionDate.length;
-
-                                                Employee.find({"DevOpsPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsPlanDate) {
-                                                if (err) return next(err);
-                                                count.DevOpsPlanDate = DevOpsPlanDate.length;
-                                                
-                                                      Employee.find({"DevOpsActualPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsActualPlanDate) {
-                                                      if (err) return next(err);
-                                                      count.DevOpsActualPlanDate = DevOpsActualPlanDate.length;
-                                                      
-                                                        Employee.find({"DevOpsCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsCompletionDate) {
-                                                          if (err) return next(err);
-                                                          count.DevOpsCompletionDate = DevOpsCompletionDate.length;
-                                                          console.log('hers ois 9999999999');
-                                                         // Object.keys(count).length;
-                                                          console.log(Object.keys(count).length );
-                                                          console.log(count.AutomationToolActualDate);
-
-                                                          //console.log(count[2]);
-
-                                                          //res.render('tes', { title: 'tes'});
-                                                          res.render('monthlyPage', { title: 'monthlycount', count});
-                                                        });
-                                                    });
-                                              });                                                
-                                          });
-                                      });
-                                  });  
-                              });
-                          });
-                    });
-              });
-        });
-  }); 
-};
+  // var fromdate = req.body.
+   //var todate = req.query.enddate;
+   
+   //var fromdate = req.params.startdate || '2020-01-01';
+   //var str = "T00:00:00.000Z";
+  // var todate = req.params.enddate  || '2020-01-31';
+   var fromdate = req.query.startdate || '2020-01-01';
+   var todate = req.query.enddate  || '2020-01-31';
+   //fromdate =fromdate +'T00:00:00.000Z';
+   // todate =  todate + 'T00:00:00.000Z';
+   console.log(fromdate);
+   console.log(todate);
+   var count = {};
+   Employee.find({"AgilePlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}},function (err, AgilePlanDate) {
+     if (err) return next(err);
+     count.AgilePlanDate = AgilePlanDate.length;
+         console.log(count)
+         Employee.find({"AgileActualDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AgileActualDate) {
+         if (err) return next(err);
+         count.AgileActualDate = AgileActualDate.length;
+       
+                Employee.find({"AgileCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AgileCompletionDate) {
+                 if (err) return next(err);
+                 count.AgileCompletionDate = AgileCompletionDate.length;
+ 
+                     Employee.find({"AutomationToolPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AutomationToolPlanDate) {
+                       if (err) return next(err);
+                       count.AutomationToolPlanDate = AutomationToolPlanDate.length;
+ 
+                           Employee.find({"AutomationToolActualDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AutomationToolActualDate) {
+                           if (err) return next(err);
+                           count.AutomationToolActualDate = AutomationToolActualDate.length;
+ 
+                               Employee.find({"AutomationToolCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, AutomationToolCompletionDate) {
+                                 if (err) return next(err);
+                                 count.AutomationToolCompletionDate = AutomationToolCompletionDate.length;
+ 
+                                     Employee.find({"PrgLangPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangPlanDate) {
+                                     if (err) return next(err);
+                                     count.PrgLangPlanDate = PrgLangPlanDate.length;
+ 
+                                         Employee.find({"PrgLangActualDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangActualDate) {
+                                         if (err) return next(err);
+                                         count.PrgLangActualDate = PrgLangActualDate.length;
+ 
+                                             Employee.find({"PrgLangCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, PrgLangCompletionDate) {
+                                             if (err) return next(err);
+                                             count.PrgLangCompletionDate = PrgLangCompletionDate.length;
+ 
+                                                 Employee.find({"DevOpsPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsPlanDate) {
+                                                 if (err) return next(err);
+                                                 count.DevOpsPlanDate = DevOpsPlanDate.length;
+                                                 
+                                                       Employee.find({"DevOpsActualPlanDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsActualPlanDate) {
+                                                       if (err) return next(err);
+                                                       count.DevOpsActualPlanDate = DevOpsActualPlanDate.length;
+                                                       
+                                                         Employee.find({"DevOpsCompletionDate":{$gte:new Date(fromdate), $lt:new Date(todate)}} ,function (err, DevOpsCompletionDate) {
+                                                           if (err) return next(err);
+                                                           count.DevOpsCompletionDate = DevOpsCompletionDate.length;
+                                                           console.log('hers ois 9999999999');
+                                                          // Object.keys(count).length;
+                                                           console.log(Object.keys(count).length );
+                                                           console.log(count.AutomationToolActualDate);
+ 
+                                                           //console.log(count[2]);
+ 
+                                                           //res.render('tes', { title: 'tes'});
+                                                           res.render('monthlyPage', { title: 'monthlycount', count});
+                                                         });
+                                                     });
+                                               });                                                
+                                           });
+                                       });
+                                   });  
+                               });
+                           });
+                     });
+               });
+         });
+   }); 
+ };
 
 
 // Display detail page for a specific book.

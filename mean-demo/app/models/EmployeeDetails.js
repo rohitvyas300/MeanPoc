@@ -23,7 +23,7 @@ var SDETSchema = new mongoose.Schema({
   MasterCustomer: String,
   Portfolio: String,
   DU:String,
-  AccountSpoke:String,
+  AccountSpoc:String,
   site:String,
   SdetFoundation:String,
   certisCompleted:Number,

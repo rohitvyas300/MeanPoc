@@ -59,7 +59,7 @@ EmpRoleCode : String,
  EmployeeHorizontalCompetency : String,
  EmployeeVerticalCompetency : String ,
  LatestRate : String, 
- MultipleRatesAvailable : String
+ MultipleRatesAvailable : String,
 });
 
 module.exports = mongoose.model('categories', readcsv_db,'category');

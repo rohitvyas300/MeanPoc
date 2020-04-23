@@ -3,7 +3,7 @@ head
   meta(charset='utf-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1')
-  title Uploaded Data
+  title Data Base
   link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css')
   link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
   //script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
@@ -315,25 +315,7 @@ head
     font-weight: normal;
     }
 
-  //- script.
-  //-     $(document).ready(function(){
-  //-     $("button").click(function(){
-  //-     var userId = $(this).attr('data-id');
-  //-     alert(userId);
-  //-     $.ajax({
-  //-           type: 'get',
-  //-           data: JSON.stringify(data),
-  //-           contentType: 'application/json',
-  //-           url: 'http://localhost:3000/',						
-  //-           success: function(data) {
-  //-           alert('success');
-  //-           alert(JSON.stringify(data));
-  //-       }
-  //-       });
-
-  //-     alert(userId);
-  //-     });
-  //-     });
+  
 
   script(type='text/javascript').
     $(document).ready(function(){
@@ -450,7 +432,7 @@ head
         .row
           .col-sm-6
             h2
-              | Uploaded 
+              | Index 
               b Data
           .col-sm-6
             a.btn.btn-danger(href='#deleteEmployeeModal' data-toggle='modal')
@@ -467,6 +449,7 @@ head
                 th EmpName
                 th EmpRoleCode
                 th ActDesc
+                th agiledate
                 th Actions
           tbody
           each book in indexpage
@@ -479,6 +462,7 @@ head
               td #{book.EmpName}
               td #{book.EmpRoleCode}
               td #{book.ActDesc}
+              td #{book.AgilePlanDate}
               td
                 form#editEmp(name='update' method='get' action='/singleUpdate')
                  input#custId(type='hidden' name= 'custId' value= book._id)
