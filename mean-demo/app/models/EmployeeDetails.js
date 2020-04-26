@@ -63,6 +63,7 @@ var SDETSchema = new mongoose.Schema({
   FrontPlanDate:Date,
   FrontActualPlanDate:Date,
   FrontCompletionDate:Date,
+  Cloud:String, 
   CloudStatus:String,
   CloudPlanDate:Date,
   CloudActualPlanDate:Date,
