@@ -23,40 +23,31 @@ exports.add_employee = function(req, res,next) {
 
 // DELETE an employee.
 exports.delete_employee = function(req, res,next) {
-  console.log("in sisde del acccillll");
-  console.log(req.params._id);
-  Employee.findByIdAndRemove(req.params._id, req.body, function (err, products){
+  //Employee.findOneAndDelete(req.params._id, req.body, function (err, products){
+  Employee.findByIdAndRemove(req.query.custId, req.body, function (err, products){
         if (err) return next(err);
-        res.json(products);
+        res.redirect('/');
       });
 };
 
 
 // UPDATE an employee.
 exports.update_employee = function(req, res,next) {
-  Employee.findByIdAndUpdate(req.params._id, req.body, function (err, products){
+  console.log('upsdata isiss');
+  console.log(req.query.EmpName);
+  console.log(req.query.custId);
+  Employee.findByIdAndUpdate(req.query.custId, req.query, function (err, products){
         if (err) return next(err);
-        res.json(products);
+        res.redirect('/');
       });
 };
-
-// Display list based on date range.
-exports.employeeList_month1 = function(req, res) {
-  Employee.find({"AgileActualDate":{$gte:new Date('2020-01-01'), $lt:new Date("2020-01-23")}},'EmpNum JlEmail MasterCustomer AgilePlanDate',function (err, products) {
-    var count = products.length;
-    console.log(count);    
-    if (err) return next(err);
-        res.json(count);
-      });
-};
-
 
 // Display certification count based on date range.
 exports.certificate_count_monthwise = function(req, res,next) {
  // var fromdate = req.body.
   //var todate = req.query.enddate;
-  var fromdate = req.query.startdate;
-  var todate = req.query.enddate
+  var fromdate = req.query.startdate || '2020-01-01';
+  var todate = req.query.enddate || '2020-01-31';
   console.log(fromdate);
   console.log(todate);
   var count = {};
@@ -115,7 +106,7 @@ exports.certificate_count_monthwise = function(req, res,next) {
                                                           //console.log(count[2]);
 
                                                           //res.render('tes', { title: 'tes'});
-                                                          res.render('monthlycount', { title: 'monthlycount', count});
+                                                          res.render('monthlyPage', { title: 'monthlycount', count});
                                                         });
                                                     });
                                               });                                                
@@ -131,31 +122,16 @@ exports.certificate_count_monthwise = function(req, res,next) {
 };
 
 
-
-
 // Display detail page for a specific book.
 exports.singleemployee_detail = function(req, res) {
+  // var tt = req.query.custId;
+  // console.log(tt);
   Employee.findById(req.params._id, req.body, function (err, products){
           if (err) return next(err);
             res.json(products);
       });
 };
 
-
-// Display detail page for a specific book.
-exports.pugemployee =  function(req, res, next) {
-  console.log("god is great....");
-  console.log(req.query.EmpName);
-  if(req.query.EmpName == 'Rohit Vyas'){
-    Employee.find({ 'EmpName': 'Rohit Vyas' }, 'EmpNum EmpName AssignAccount AgilePlanDate EmpRoleCode City Location', function (err, products) {
-          if (err) return next(err);
-    console.log(products.length);
-    //res.render('monthlycount', { title: 'monthlycount', pugemployee:products});
-    res.render('tes', { title: 'tes'});
-      //res.json(products);
-    });
-  }
-};
 
 // Display detail page for a specific book.
 exports.employee_detail = function(req, res) {
@@ -177,28 +153,47 @@ exports.employee_detail = function(req, res) {
 };
 
 //FrontEnd--------------------------------------
-
 // Display detail page for a specific book.
 exports.indexpage =  function(req, res, next) {
   console.log("god is greater....");
-  Employee.find(function (err, products) {
-          if (err) return next(err);
-    console.log(products.length);
-    //res.render('index', { title: 'index', indexpage:products});
-    res.render('delemployee', { title: 'del', indexpage:products});
-    });
+    var perPage = 10
+    var page = req.query.page || 1
+    console.log('pageis '+page);
+    console.log(page);
+    Employee.find()
+    .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function(err, products) {
+          Employee.countDocuments().exec(function(err, count) {
+                if (err) return next(err)
+                console.log(count);  
+                  res.render('index', {
+                  // res.render('tes', {
+                    indexpage:products,
+                     pages: Math.ceil(count / perPage)
+                 })
+            })
+        });
 };
 
 // Display detail page for a specific book.
 exports.monthlypage =  function(req, res) {
-  console.log("god is great....");
     res.render('monthlyPage', { title: 'monthhan'});
 };
 
 // Display detail page for a specific book.
 exports.addaccountpage =  function(req, res) {
-  console.log("god is great....");
     res.render('addaccountPage', { title: 'add'});
+};
+
+// Display detail page for a specific book.
+exports.singleRecordUpdate_detail = function(req, res) {
+   var tt = req.query.custId;
+   console.log(tt);
+  Employee.findById(req.query.custId, req.body, function (err, products){
+          if (err) return next(err);
+          res.render('addaccountPage', {'singleRecordData': products});
+      });
 };
 
 
