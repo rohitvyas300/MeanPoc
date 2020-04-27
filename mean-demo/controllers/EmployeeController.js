@@ -42,6 +42,614 @@ exports.update_employee = function(req, res,next) {
       });
 };
 
+exports.test =  function(req, res,next) 
+{
+      var combinePlanCount = {};
+      Employee.aggregate([
+        // First Stage
+        {
+          $match : { "AgilePlanDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01") } }
+        },
+        {
+          $group : {
+            _id : { 
+              "agilePlan": { year: { $year : "$AgilePlanDate" }, month: { $month : "$AgilePlanDate" }},
+              },
+            agilePlanCount: { $sum: 1 }
+          }
+        },
+        ],function (err, result) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        combinePlanCount.agilePlanMonthCount = result;
+      });
+      //AgileActual date
+      Employee.aggregate([
+        // First Stage
+        {
+          $match : { "AgileActualDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01") } }
+        },
+        {
+          $group : {
+            _id : { 
+              "agileActual": { year: { $year : "$AgileActualDate" }, month: { $month : "$AgileActualDate" }},
+              },
+              agileActualcount: { $sum: 1 }
+          }
+        },
+        ],function (err, result2) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        combinePlanCount.agileActualMonth = result2;
+      });//End of Agile Actual
+      Employee.aggregate([
+        {
+          $match : { "AutomationToolPlanDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01") } }
+        },
+        {
+          $group : {
+            _id : { 
+              "automationPlan": { year: { $year : "$AutomationToolPlanDate" }, month: { $month : "$AutomationToolPlanDate" }},
+              },
+              automationToolPlancount: { $sum: 1 }
+          }
+        },
+        ],function (err, result3) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        combinePlanCount.automationPlanMonth = result3;
+      });//End of AutomationToolPlanDate
+      Employee.aggregate([
+        {
+          $match : { "AutomationToolActualDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01") } }
+        },
+        {
+          $group : {
+            _id : { 
+              "automationActual": { year: { $year : "$AutomationToolActualDate" }, month: { $month : "$AutomationToolActualDate" }},
+              },
+              automationToolActualcount: { $sum: 1 }
+          }
+        },
+        ],function (err, result4) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        combinePlanCount.automationActualMonth = result4;
+      });//End of AutomationToolActualDate
+      Employee.aggregate([
+        {
+          $match : { "PrgLangPlanDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01") } }
+        },
+        {
+          $group : {
+            _id : { 
+              "prgLangPlan": { year: { $year : "$PrgLangPlanDate" }, month: { $month : "$PrgLangPlanDate" }},
+              },
+              prgLangPlancount: { $sum: 1 }
+          }
+        },
+        ],function (err, result5) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        combinePlanCount.prgLangPlanMonth = result5;
+      });//End of PrgLangPlanDate
+      Employee.aggregate([
+        {
+          $match : { "PrgLangActualDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01") } }
+        },
+        {
+          $group : {
+            _id : { 
+              "prgLangActual": { year: { $year : "$PrgLangActualDate" }, month: { $month : "$PrgLangActualDate" }},
+              },
+              prgLangActualcount: { $sum: 1 }
+          }
+        },
+        ],function (err, result6) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        combinePlanCount.prgLangActualMonth = result6;
+      });//End of PrgLangActualDate
+      Employee.aggregate([
+        {
+          $match : {"DevOpsPlanDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01") } }
+        },
+        {
+          $group : {
+            _id : { 
+              "devOpsPlan": { year: { $year : "$DevOpsPlanDate"}, month: { $month : "$DevOpsPlanDate"}},
+              },
+              devOpsPlancount: { $sum: 1 }
+          }
+        },
+        ],function (err, result7) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        combinePlanCount.devOpsPlanMonth = result7;
+      });//End of  DevOpsPlanDate
+    //to be use in last------------
+    Employee.aggregate([
+      // First Stage
+      {
+        $match : { "DevOpsActualPlanDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01") } }
+      },
+      {
+        $group : {
+          _id : { 
+            "devOpsActual": { year: { $year : "$DevOpsActualPlanDate" }, month: { $month : "$DevOpsActualPlanDate" }},
+            },
+            devOpsActualcount: { $sum: 1 }
+        }
+      }
+      ],function (err, result8) {
+      if (err) {
+          console.log(err);
+          return;
+      }
+      combinePlanCount.devOpsActualMonth = result8;
+      monthWiseCount = {};
+      //Agile plan
+      for (i = 0; i < 11; i++) {
+        if(combinePlanCount.agilePlanMonthCount[i] != null)
+        {
+            var tes = combinePlanCount.agilePlanMonthCount[i]._id.agilePlan.month
+            if(tes ==1)
+            {
+              monthWiseCount.agilePlanJan = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==2)
+            {
+              monthWiseCount.agilePlanFeb = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==3)
+            {
+              monthWiseCount.agilePlanMar = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==4)
+            {
+              monthWiseCount.agilePlanApril = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==5)
+            {
+              monthWiseCount.agilePlanMay = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==6)
+            {
+              monthWiseCount.agilePlanJun = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==7)
+            {
+              monthWiseCount.agilePlanJul = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==8)
+            {
+              monthWiseCount.agilePlanAug = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==9)
+            {
+              monthWiseCount.agilePlanSep = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==10)
+            {
+              monthWiseCount.agilePlanOct = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==11)
+            {
+              monthWiseCount.agilePlanNov = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+            if(tes ==12)
+            {
+              monthWiseCount.agilePlanDec = combinePlanCount.agilePlanMonthCount[i].agilePlanCount;
+            }
+          }    
+      }
+    //Agile Actual
+      for (i = 0; i < 11; i++) {
+        if(combinePlanCount.agileActualMonth[i] != null)
+        { 
+          var tes = combinePlanCount.agileActualMonth[i]._id.agileActual.month
+          if(tes ==1)
+          {
+            monthWiseCount.agileActualJan = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==2)
+          {
+            monthWiseCount.agileActualFeb = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==3)
+          {
+            monthWiseCount.agileActualMar = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==4)
+          {
+            monthWiseCount.agileActualApril = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==5)
+          {
+            monthWiseCount.agileActualMay= combinePlanCount.agileActualMonth[i].agileActualcount;
+          }  
+          if(tes ==6)
+          {
+            monthWiseCount.agileActualJun = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==7)
+          {
+            monthWiseCount.agileActualJul = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==8)
+          {
+            monthWiseCount.agileActualAug = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==9)
+          {
+            monthWiseCount.agileActualSep = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==10)
+          {
+            monthWiseCount.agileActualOct = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==11)
+          {
+            monthWiseCount.agileActualNov = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+          if(tes ==12)
+          {
+            monthWiseCount.agileActualDec = combinePlanCount.agileActualMonth[i].agileActualcount;
+          }
+
+      } 
+    }
+      //Automation plan
+    for (i = 0; i < 11; i++) {
+      if(combinePlanCount.automationPlanMonth[i] != null)
+      { 
+        var tes = combinePlanCount.automationPlanMonth[i]._id.automationPlan.month
+        if(tes ==1)
+        {
+          monthWiseCount.automationToolPlanJan = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==2)
+        {
+          monthWiseCount.automationToolPlanFeb = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==3)
+        {
+          monthWiseCount.automationToolPlanMar = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==4)
+        {
+          monthWiseCount.automationToolPlanApril = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==5)
+        {
+          monthWiseCount.automationToolPlanMay = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }  
+        if(tes ==6)
+        {
+          monthWiseCount.automationToolPlanJun = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==7)
+        {
+          monthWiseCount.automationToolPlanJul = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==8)
+        {
+          monthWiseCount.automationToolPlanAug = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==9)
+        {
+          monthWiseCount.automationToolPlanSep = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==10)
+        {
+          monthWiseCount.automationToolPlanOct = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==11)
+        {
+          monthWiseCount.automationToolPlanNov = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+        if(tes ==12)
+        {
+          monthWiseCount.automationToolPlanDec = combinePlanCount.automationPlanMonth[i].automationToolPlancount;
+        }
+      }//if 
+    }//End of for 
+    //Automation actual
+    for (i = 0; i < 11; i++) {
+      if(combinePlanCount.automationActualMonth[i] != null)
+      { 
+        var tes = combinePlanCount.automationActualMonth[i]._id.automationActual.month
+        if(tes ==1)
+        {
+          monthWiseCount.automationToolActualJan = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==2)
+        {
+          monthWiseCount.automationToolActualFeb = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==3)
+        {
+          monthWiseCount.automationToolActualMar = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==4)
+        {
+          monthWiseCount.automationToolActualApril = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==5)
+        {
+          monthWiseCount.automationToolActualMay = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }  
+        if(tes ==6)
+        {
+          monthWiseCount.automationToolActualJun = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==7)
+        {
+          monthWiseCount.automationToolActualJul = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==8)
+        {
+          monthWiseCount.automationToolActualAug = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==9)
+        {
+          monthWiseCount.automationToolActualSep = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==10)
+        {
+          monthWiseCount.automationToolActualOct = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==11)
+        {
+          monthWiseCount.automationToolActualNov = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+        if(tes ==12)
+        {
+          monthWiseCount.automationToolActualDec = combinePlanCount.automationActualMonth[i].automationToolActualcount;
+        }
+      }//if 
+    }//End of for
+    //Prog language plan
+    for (i = 0; i < 11; i++) {
+      if(combinePlanCount.prgLangPlanMonth[i] != null)
+      { 
+        var tes = combinePlanCount.prgLangPlanMonth[i]._id.prgLangPlan.month
+        if(tes ==1)
+        {
+          monthWiseCount.prgLangPlanJan = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==2)
+        {
+          monthWiseCount.prgLangPlanFeb = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==3)
+        {
+          monthWiseCount.prgLangPlanMar = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==4)
+        {
+          monthWiseCount.prgLangPlanApril = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==5)
+        {
+          monthWiseCount.prgLangPlanMay = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }  
+        if(tes ==6)
+        {
+          monthWiseCount.prgLangPlanJun = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==7)
+        {
+          monthWiseCount.prgLangPlanJul = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==8)
+        {
+          monthWiseCount.prgLangPlanAug = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==9)
+        {
+          monthWiseCount.prgLangPlanSep = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==10)
+        {
+          monthWiseCount.prgLangPlanOct = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==11)
+        {
+          monthWiseCount.prgLangPlanNov = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+        if(tes ==12)
+        {
+          monthWiseCount.prgLangPlanDec = combinePlanCount.prgLangPlanMonth[i].prgLangPlancount;
+        }
+      } //if
+    }//End of for
+    //Prg language actual
+    for (i = 0; i < 11; i++) {
+      if(combinePlanCount.prgLangActualMonth[i] != null)
+      { 
+        var tes = combinePlanCount.prgLangActualMonth[i]._id.prgLangActual.month
+        if(tes ==1)
+        {
+          monthWiseCount.prgLangActualJan = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==2)
+        {
+          monthWiseCount.prgLangActualFeb = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==3)
+        {
+          monthWiseCount.prgLangActualMar = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==4)
+        {
+          monthWiseCount.prgLangActualApril = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==5)
+        {
+          monthWiseCount.prgLangActualMay = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }  
+        if(tes ==6)
+        {
+          monthWiseCount.prgLangActualJun = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==7)
+        {
+          monthWiseCount.prgLangActualJul = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==8)
+        {
+          monthWiseCount.prgLangActualAug = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==9)
+        {
+          monthWiseCount.prgLangActualSep = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==10)
+        {
+          monthWiseCount.prgLangActualOct = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==11)
+        {
+          monthWiseCount.prgLangActualNov = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+        if(tes ==12)
+        {
+          monthWiseCount.prgLangActualDec = combinePlanCount.prgLangActualMonth[i].prgLangActualcount;
+        }
+      } //if
+    }//End of for
+    //Devoops plan
+    for (i = 0; i < 11; i++) {
+      if(combinePlanCount.devOpsPlanMonth[i] != null)
+      { 
+        var tes = combinePlanCount.devOpsPlanMonth[i]._id.devOpsPlan.month
+        if(tes ==1)
+        {
+          monthWiseCount.devOpsPlanJan = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==2)
+        {
+          monthWiseCount.devOpsPlanFeb = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==3)
+        {
+          monthWiseCount.devOpsPlanMar = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==4)
+        {
+          monthWiseCount.devOpsPlanApril = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==5)
+        {
+          monthWiseCount.devOpsPlanMay = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }  
+        if(tes ==6)
+        {
+          monthWiseCount.devOpsPlanJun = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==7)
+        {
+          monthWiseCount.devOpsPlanJul = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==8)
+        {
+          monthWiseCount.devOpsPlanAug = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==9)
+        {
+          monthWiseCount.devOpsPlanSep = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==10)
+        {
+          monthWiseCount.devOpsPlanOct = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==11)
+        {
+          monthWiseCount.devOpsPlanNov = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+        if(tes ==12)
+        {
+          monthWiseCount.devOpsPlanDec = combinePlanCount.devOpsPlanMonth[i].devOpsPlancount;
+        }
+      } //if
+    }//End of for
+    //devoops Actual
+    for (i = 0; i < 11; i++) {
+      if(combinePlanCount.devOpsActualMonth[i] != null)
+      { 
+        var tes = combinePlanCount.devOpsActualMonth[i]._id.devOpsActual.month
+        if(tes ==1)
+        {
+          monthWiseCount.devOpsActualJan = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==2)
+        {
+          monthWiseCount.devOpsActualFeb = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==3)
+        {
+          monthWiseCount.devOpsActualMar = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==4)
+        {
+          monthWiseCount.devOpsActualApril = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==5)
+        {
+          monthWiseCount.devOpsActualMay = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }  
+        if(tes ==6)
+        {
+          monthWiseCount.devOpsActualJun = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==7)
+        {
+          monthWiseCount.devOpsActualJul = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==8)
+        {
+          monthWiseCount.devOpsActualAug = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==9)
+        {
+          monthWiseCount.devOpsActualSep = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==10)
+        {
+          monthWiseCount.devOpsActualOct = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==11)
+        {
+          monthWiseCount.devOpsActualNov = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+        if(tes ==12)
+        {
+          monthWiseCount.devOpsActualDec = combinePlanCount.devOpsActualMonth[i].devOpsActualcount;
+        }
+      } //if
+    }//End of for
+      //end me 
+      //res.render('monthlycount');
+      res.send(monthWiseCount);
+    });//End of AutomationToolActualDate 
+};//End of functions 
+
+
 // Display certification count based on date range.
 exports.certificate_count_monthwise = function(req, res,next) {
  // var fromdate = req.body.

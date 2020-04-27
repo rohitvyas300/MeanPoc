@@ -19,6 +19,7 @@ router.get('/update', employee_controller.update_employee);
 router.get('/month', employee_controller.certificate_count_monthwise);
 // GET request for one employee on id.
 router.get('/single/:id', employee_controller.singleemployee_detail);
+router.get('/tes', employee_controller.test);
 
 //FrontEnd routes
 router.get('/', employee_controller.indexpage);

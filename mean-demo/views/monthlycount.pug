@@ -1,42 +1,177 @@
 doctype html
-html(lang='en')
-  head
-    title Staff Directory
-    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.css')
-    style.
-      table.ui.celled img { display: inline-block; }
-      footer { margin: 35px 0 15px 0; text-align: center }
-  body
-    main#main
-    h1.ui.center.aligned.header Staff Directory
-    .ui.container
-      table.ui.celled.table.center.aligned
-        thead
-          tr
-            th Track
-            th Planned
-            th Actual
-            tr 
-            th Agile
-            th #{count.AgilePlanDate}
-            th #{count.AgileActualDate}
-            tr 
-            th AutomationTool
-            th #{count.AutomationToolPlanDate}
-            th #{count.AutomationToolActualDate}
-          tr 
-          th ProgrammingLanguage
-          th #{count.PrgLangPlanDate}
-          th #{count.PrgLangActualDate}
-          tr 
-          th DevOpsProfessional
-          th #{count.DevOpsPlanDate}
-          th #{count.DevOpsActualPlanDate}
-        tbody
-          
-
-        tfoot
-          tr
-            th(colspan='6')
-    footer
-      p © #{new Date().getFullYear()} My Company
+| PASTE YOUR
+head
+  title How to show total amount month and year wise PHP
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+.container
+  // Table
+  table#tablePreview.table.table-bordered.table-sm
+    // Table head
+    thead
+      tr
+        th #
+        th Track
+        th
+        th
+        th Jan
+        th
+        th Feb
+        th
+        th Mar
+        th
+        th Apr
+        th
+        th May
+        th
+        th Jun
+        th
+        th Jul
+        th
+        th Aug
+        th
+        th Sep
+        th
+        th Oct
+        th
+        th Nov
+        th
+        th Dec
+      tr
+      th
+      th
+      th
+      th
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+      th Plan
+      th Actual
+    // Table head
+    // Table body
+    tbody
+      tr
+        th(scope='row') 1
+        td Agile
+        td Summary
+        td
+        td 10p
+        td 2
+        td 12
+        td 3
+        td p
+        td a
+        td p
+        td a
+        td p
+        td a
+      tr
+        th(scope='row') 2
+        td PrgLanguage
+        td Summary
+        td
+        td 10p
+        td 8a
+        td 7p
+        td 6a
+        td p
+        td a
+        td p
+        td a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+      tr
+      tr
+        th(scope='row') 3
+        td Automation Tool
+        td Summary
+        td
+        td 10p
+        td 8a
+        td 7p
+        td 6a
+        td p
+        td a
+        td p
+        td a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+      tr
+      tr
+        th(scope='row') 4
+        td DevOps Professional
+        td Summary
+        td
+        td 10p
+        td 8a
+        td 7p
+        td 6a
+        td p
+        td a
+        td p
+        td a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+        td p
+        td @a
+      tr
