@@ -1,7 +1,6 @@
 doctype html
-| PASTE YOUR
 head
-  title How to show total amount month and year wise PHP
+  title Total Count Month and year wise
   meta(charset='utf-8')
   meta(name='viewport' content='width=device-width, initial-scale=1')
   link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
@@ -38,35 +37,35 @@ head
         th Nov
         th
         th Dec
-      tr
-      th
-      th
-      th
-      th
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
-      th Plan
-      th Actual
+        tr
+        th
+        th
+        th
+        th
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
+        th Plan
+        th Actual
     // Table head
     // Table body
     tbody
@@ -75,103 +74,117 @@ head
         td Agile
         td Summary
         td
-        td 10p
-        td 2
-        td 12
-        td 3
-        td p
-        td a
-        td p
-        td a
-        td p
-        td a
+        td #{monthWiseCount.agilePlanJan}
+        td #{monthWiseCount.agileActualJan}
+        td #{monthWiseCount.agilePlanFeb}
+        td #{monthWiseCount.agileActualFeb}
+        td #{monthWiseCount.agilePlanMar}
+        td #{monthWiseCount.agileActualMar}
+        td #{monthWiseCount.agilePlanApril}
+        td #{monthWiseCount.agileActualApril}
+        td #{monthWiseCount.agilePlanMay}
+        td #{monthWiseCount.agileActualMay}
+        td #{monthWiseCount.agilePlanJun}
+        td #{monthWiseCount.agileActualJun}
+        td #{monthWiseCount.agilePlanJul}
+        td #{monthWiseCount.agileActualJul}
+        td #{monthWiseCount.agilePlanAug}
+        td #{monthWiseCount.agileActualAug}
+        td #{monthWiseCount.agilePlanSep}
+        td #{monthWiseCount.agileActualSep}
+        td #{monthWiseCount.agilePlanOct}
+        td #{monthWiseCount.agileActualOct}
+        td #{monthWiseCount.agilePlanNov}
+        td #{monthWiseCount.agileActualNov}
+        td #{monthWiseCount.agilePlanDec}
+        td #{monthWiseCount.agileActualDec}
       tr
         th(scope='row') 2
         td PrgLanguage
         td Summary
         td
-        td 10p
-        td 8a
-        td 7p
-        td 6a
-        td p
-        td a
-        td p
-        td a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
+        td #{monthWiseCount.prgLangPlanJan}
+        td #{monthWiseCount.prgLangActualJan}
+        td #{monthWiseCount.prgLangPlanFeb}
+        td #{monthWiseCount.prgLangActualFeb}
+        td #{monthWiseCount.prgLangPlanMar}
+        td #{monthWiseCount.prgLangActualMar}
+        td #{monthWiseCount.prgLangPlanApril}
+        td #{monthWiseCount.prgLangActualApril}
+        td #{monthWiseCount.prgLangPlanMay}
+        td #{monthWiseCount.prgLangActualMay}
+        td #{monthWiseCount.prgLangPlanJun}
+        td #{monthWiseCount.prgLangActualJun}
+        td #{monthWiseCount.prgLangPlanJul}
+        td #{monthWiseCount.prgLangActualJul}
+        td #{monthWiseCount.prgLangPlanAug}
+        td #{monthWiseCount.prgLangActualAug}
+        td #{monthWiseCount.prgLangPlanSep}
+        td #{monthWiseCount.prgLangActualSep}
+        td #{monthWiseCount.prgLangPlanOct}
+        td #{monthWiseCount.prgLangActualOct}
+        td #{monthWiseCount.prgLangPlanNov}
+        td #{monthWiseCount.prgLangActualNov}
+        td #{monthWiseCount.prgLangPlanDec}
+        td #{monthWiseCount.prgLangActualDec}
       tr
       tr
         th(scope='row') 3
         td Automation Tool
         td Summary
         td
-        td 10p
-        td 8a
-        td 7p
-        td 6a
-        td p
-        td a
-        td p
-        td a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
+        td #{monthWiseCount.automationToolPlanJan}
+        td #{monthWiseCount.automationToolActualJan}
+        td #{monthWiseCount.automationToolPlanFeb}
+        td #{monthWiseCount.automationToolActualFeb}
+        td #{monthWiseCount.automationToolPlanMar}
+        td #{monthWiseCount.automationToolActualMar}
+        td #{monthWiseCount.automationToolPlanApril}
+        td #{monthWiseCount.automationToolActualApril}
+        td #{monthWiseCount.automationToolPlanMay}
+        td #{monthWiseCount.automationToolActualMay}
+        td #{monthWiseCount.automationToolPlanJun}
+        td #{monthWiseCount.automationToolActualJun}
+        td #{monthWiseCount.automationToolPlanJul}
+        td #{monthWiseCount.automationToolActualJul}
+        td #{monthWiseCount.automationToolPlanAug}
+        td #{monthWiseCount.automationToolActualAug}
+        td #{monthWiseCount.automationToolPlanSep}
+        td #{monthWiseCount.automationToolActualSep}
+        td #{monthWiseCount.automationToolPlanOct}
+        td #{monthWiseCount.automationToolActualOct}
+        td #{monthWiseCount.automationToolPlanNov}
+        td #{monthWiseCount.automationToolActualNov}
+        td #{monthWiseCount.automationToolPlanDec}
+        td #{monthWiseCount.automationToolActualDec}
       tr
       tr
         th(scope='row') 4
         td DevOps Professional
         td Summary
         td
-        td 10p
-        td 8a
-        td 7p
-        td 6a
-        td p
-        td a
-        td p
-        td a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
-        td p
-        td @a
+        td #{monthWiseCount.devOpsPlanJan}
+        td #{monthWiseCount.devOpsActualJan}
+        td #{monthWiseCount.devOpsPlanFeb}
+        td #{monthWiseCount.devOpsActualFeb}
+        td #{monthWiseCount.devOpsPlanMar}
+        td #{monthWiseCount.devOpsActualMar}
+        td #{monthWiseCount.devOpsPlanApril}
+        td #{monthWiseCount.devOpsActualApril}
+        td #{monthWiseCount.devOpsPlanMay}
+        td #{monthWiseCount.devOpsActualMay}
+        td #{monthWiseCount.devOpsPlanJun}
+        td #{monthWiseCount.devOpsActualJun}
+        td #{monthWiseCount.devOpsPlanJul}
+        td #{monthWiseCount.devOpsActualJul}
+        td #{monthWiseCount.devOpsPlanAug}
+        td #{monthWiseCount.devOpsActualAug}
+        td #{monthWiseCount.devOpsPlanSep}
+        td #{monthWiseCount.devOpsActualSep}
+        td #{monthWiseCount.devOpsPlanOct}
+        td #{monthWiseCount.devOpsActualOct}
+        td #{monthWiseCount.devOpsPlanNov}
+        td #{monthWiseCount.devOpsActualNov}
+        td #{monthWiseCount.devOpsPlanDec}
+        td #{monthWiseCount.devOpsActualDec}
       tr
