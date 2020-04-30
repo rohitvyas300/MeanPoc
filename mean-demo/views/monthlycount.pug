@@ -6,7 +6,7 @@ head
   link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
 .container
   // Table
-  table#tablePreview.table.table-bordered.table-sm
+  table#tablePreview.table-dark.table.table-bordered
     // Table head
     thead
       tr
@@ -188,3 +188,34 @@ head
         td #{monthWiseCount.devOpsPlanDec}
         td #{monthWiseCount.devOpsActualDec}
       tr
+      tr
+        th(scope='row') 5
+        td Total
+        td Summary
+        td
+        td #{monthWiseCount.JanPlanTotal}
+        td #{monthWiseCount.JanActualTotal}
+        td #{monthWiseCount.FebPlanTotal}
+        td #{ monthWiseCount.FebActualTotal}
+        td #{monthWiseCount.MarPlanTotal}
+        td #{monthWiseCount.MarActualTotal}
+        td #{monthWiseCount.AprilPlanTotal}
+        td #{monthWiseCount.AprilActualTotal}
+        td #{monthWiseCount.MayPlanTotal}
+        td #{monthWiseCount.MayActualTotal}
+        td #{monthWiseCount.JunPlanTotal}
+        td #{monthWiseCount.JunActualTotal}
+        td #{monthWiseCount.JulPlanTotal}
+        td #{monthWiseCount.JulActualTotal}
+        td #{monthWiseCount.AugPlanTotal}
+        td #{monthWiseCount.AugActualTotal}
+        td #{monthWiseCount.SepPlanTotal}
+        td #{monthWiseCount.SepActualTotal }
+        td #{monthWiseCount.OctPlanTotal}
+        td #{monthWiseCount.OctActualTotal}
+        td #{monthWiseCount.NovPlanTotal}
+        td #{monthWiseCount.NovActualTotal}
+        td #{monthWiseCount.DecPlanTotal}
+        td #{monthWiseCount.DecActualTotal}
+      tr
+  
