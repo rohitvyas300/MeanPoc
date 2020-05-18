@@ -57,33 +57,6 @@ exports.uploadPage =  function(req, res) {
   //  });
 };
 
-/*
-// Display detail page for a specific book.
-exports.showuploadeddata =  function(req, res, next) {
-  console.log("Shri Sai Ram....");
-    var perPage = 100
-    var page = req.query.page || 1
-    console.log('pageis '+page);
-    console.log(page);
-    csvModel
-        .find({})
-        .skip((perPage * page) - perPage)
-        .limit(perPage)
-        .exec(function(err, products) {
-          csvModel.countDocuments().exec(function(err, count) {
-                if (err) return next(err)
-                console.log(count);  
-                  res.render('uploadedData', {
-                  // res.render('tes', {
-                   dataUpload:products,
-                     pages: Math.ceil(count / perPage)
-                 })
-            })
-        })   
-  };
-  */
-
-
 // Display detail page for a specific book.
 exports.showuploadeddata =  function(req, res, next) {
   console.log("Shri Sai Ram....");
@@ -95,8 +68,8 @@ exports.showuploadeddata =  function(req, res, next) {
         .find({"EmpDU" : { $in : ["IVS-DEVOPDU3"]}})
         .exec(function(err, products) {   
         // Get the companies whose founders are in that set.
-        csvModel.find( { $and: [ {CurrentCity: {$in: ["CHENNAI","PUNE"]}}, {"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1"]}}]})
-    //csvModel.find({CurrentCity: {$in: ["CHENNAI","PUNE"]}},{"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1"]}})
+        csvModel.find( { $and: [ {CourseCode: {$in: ["TETAJEEDEVIC1010","TETAIVSCPSEC1001","PQLYSEPAGLIC3001","TETAJEEDEVIC1000","TETAIVSSELIC1002","PQLYAGLDEVIC2001"]}}, {"ParticipantPU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1","IVS-FS2"]}},{"isCompleted":"TRUE"}]})
+    //csvModel.find({CurrentCity: {$in: ["CHENNAI","PUNE"]}},{"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1","IVS-FS","IVS-FS2"]}})
     .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec(function(err, docs) {

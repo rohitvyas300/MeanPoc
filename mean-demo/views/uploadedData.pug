@@ -288,10 +288,10 @@ head
             span.custom-checkbox
               input#checkbox1(type='checkbox' name='options[]' value='1')
               label(for='checkbox1')
-          td #{book.EmpNo}
-          td #{book.EmpName}
-          td #{book.ActDesc}
-          td #{book.EmpRoleCode}
+          td #{book.ParticipantId}
+          td #{book.ParticipantPU}
+          td #{book.CourseCode}
+          td #{book.isCompleted}
           td
             a.edit(href='#editEmployeeModal' data-toggle='modal')
               i.material-icons(data-toggle='tooltip' title='Edit') &#xE254;

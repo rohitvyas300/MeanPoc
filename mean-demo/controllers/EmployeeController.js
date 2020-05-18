@@ -711,10 +711,6 @@ exports.certificate_count_monthwise =  function(req, res,next)
   });//Agileplan fun end
 };//end of fun
 
-
-
-
-
 // Display certification count based on date range.
 exports.certificate_count_monthwise2 = function(req, res,next) {
  // var fromdate = req.body.
@@ -794,9 +790,7 @@ exports.certificate_count_monthwise2 = function(req, res,next) {
   }); 
 };
 
-
 exports.planVsActual = function(req, res) {
-//ne,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 var fromdate = req.query.startdate || '2020-01-01';
   var todate = req.query.enddate || '2021-01-01';
   console.log(fromdate);
@@ -1245,80 +1239,6 @@ var fromdate = req.query.startdate || '2020-01-01';
 }); });});});});});});});});});});});});});});});});});});});});});});});});});});});});});});});});
 };//Eod of function
 
-
-exports.planVsActual33 = function(req, res) {
-  console.log('thid is it....');
-  Employee.aggregate([
-    {
-      $match : {"AgilePlanDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01")},"AgilePlanDate": { "$ne": null }}
-    },
-    { $group: {
-      _id: {name: "Anjali"},
-      count: {$sum: 1},
-      }
-    },
-    ],function (err, result7) {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    console.log('here i am...77');
-    res.send(result7);
-    
- });//End of  DevOpsPlanDate
-};//E
-
-
-exports.planVsActual44 = function(req, res) {
-    Employee.aggregate([
-      {
-        $match : {"AgilePlanDate": {$gte:new Date("2020-01-01"), $lt: new Date("2021-01-01")}}
-      },
-      { $group: {
-        _id: {name: "Anjali"},
-        count: {$sum: 1},
-        },
-        $group: {
-          _id: {name: "Ritesh Zade"},
-          count2: {$sum: 1},
-          },
-      },],function (err, result7) {
-      if (err) {
-          console.log(err);
-          return;
-      }
-      console.log('here i am...7');
-      res.send(result7);
-   });//End of  DevOpsPlanDate
-};//E
-
-exports.planVsActual55 = function(req, res) {
-  console.log('inside functin planactu44...');
-  Employee.aggregate([
-    {
-      $match : {"AccountSpoke": "Anjali","AgileActualDate": { "$ne": null }}
-    },
-    { $group:
-      {
-         _id: {nam:"$AccountSpoke"},
-        count1: {$sum: 1},
-      },
-   },
-  //{'$match':{'count': {'$gt': 1}}}
-  ],function (err, result7) {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    res.send(result7);
-
-
-
-                
-
-  });//Agileplan 
-};//Eod of method
-
 // Display detail page for a specific book.
 exports.singleemployee_detail = function(req, res) {
   // var tt = req.query.custId;
@@ -1328,7 +1248,6 @@ exports.singleemployee_detail = function(req, res) {
             res.json(products);
       });
 };
-
 
 // Display detail page for a specific book.
 exports.employee_detail = function(req, res) {
