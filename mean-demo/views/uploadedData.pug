@@ -276,10 +276,10 @@ head
             span.custom-checkbox
               input#selectAll(type='checkbox')
               label(for='selectAll')
-            th EmpNum
-            th EmpName
-            th ActDesc
-            th EmpRoleCode
+            th EmpId
+            th EmpDU
+            th CourseCode
+            th Completed
             th Actions
       tbody
       each book in dataUpload
@@ -289,7 +289,7 @@ head
               input#checkbox1(type='checkbox' name='options[]' value='1')
               label(for='checkbox1')
           td #{book.ParticipantId}
-          td #{book.ParticipantPU}
+          td #{book.ParticipantDU}
           td #{book.CourseCode}
           td #{book.isCompleted}
           td

@@ -4,7 +4,7 @@ var readcsv_db = new mongoose.Schema({
 ParticipantId : String, 
 ParticipantMailId : String, 
 ParticipantIBU : String,
-ParticipantPU: String, 
+ParticipantDU: String, 
 ParticipantJL : String,
 ParticipantLocation: String,
 ParticipantAccount: String,

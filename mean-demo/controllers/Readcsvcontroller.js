@@ -4,6 +4,8 @@ const formidable = require('formidable');
 const fs = require('fs');
 var mv = require('mv');
 var csvModel = require('../app/models/ReadCsvModel');
+var Employee = require('../app/models/EmployeeDetails');
+var Certificate = require('../app/models/CertificationsModel');
 
 exports.datatodb = async function(req, res) {
   csvModel.collection.drop();
@@ -23,8 +25,6 @@ exports.datatodb = async function(req, res) {
                 fs.unlink(oldPath, function(){
                     if(err) throw err;
                     //res.send("File uploaded to: " + newPath);
-
-                    console.log('this is 1223334444455...');
                     csvtojson()
                         .fromFile(newPath)
                       //.then(csvData => {
@@ -57,6 +57,7 @@ exports.uploadPage =  function(req, res) {
   //  });
 };
 
+/*
 // Display detail page for a specific book.
 exports.showuploadeddata =  function(req, res, next) {
   console.log("Shri Sai Ram....");
@@ -68,7 +69,7 @@ exports.showuploadeddata =  function(req, res, next) {
         .find({"EmpDU" : { $in : ["IVS-DEVOPDU3"]}})
         .exec(function(err, products) {   
         // Get the companies whose founders are in that set.
-        csvModel.find( { $and: [ {CourseCode: {$in: ["TETAJEEDEVIC1010","TETAIVSCPSEC1001","PQLYSEPAGLIC3001","TETAJEEDEVIC1000","TETAIVSSELIC1002","PQLYAGLDEVIC2001"]}}, {"ParticipantPU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1","IVS-FS2"]}},{"isCompleted":"TRUE"}]})
+        csvModel.find( { $and: [ {CourseCode: {$in: ["TETAJEEDEVIC1010","TETAIVSCPSEC1001","PQLYSEPAGLIC3001","TETAJEEDEVIC1000","TETAIVSSELIC1002","PQLYAGLDEVIC2001"]}}, {"ParticipantDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1","IVS-FS2"]}},{"isCompleted":"TRUE"}]})
     //csvModel.find({CurrentCity: {$in: ["CHENNAI","PUNE"]}},{"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1","IVS-FS","IVS-FS2"]}})
     .skip((perPage * page) - perPage)
         .limit(perPage)
@@ -84,4 +85,58 @@ exports.showuploadeddata =  function(req, res, next) {
             })
         });
       });   
+ };
+ */
+
+ // Display detail page for a specific book.
+exports.showuploadeddata =  function(req, res, next) {
+  console.log("Shri Sai Ram....");
+    var perPage = 10
+    var page = req.query.page || 1
+    console.log('pageis '+page);
+
+   // csvModel.find().forEach(function (doc1) {
+    csvModel.find( { $and: [ {CourseCode: {$in: ["TETAJEEDEVIC1010","TETAIVSCPSEC1001","PQLYSEPAGLIC3001","TETAJEEDEVIC1000","TETAIVSSELIC1002","PQLYAGLDEVIC2001"]}}, {"ParticipantDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1","IVS-FS2"]}},{"isCompleted":"TRUE"}]}).exec(function(err, docs)
+    {
+      docs.forEach(function(doc){
+        
+        //console.log(doc.ParticipantId);
+        Employee.find({ 'EmpNum': doc.ParticipantId }, 'EmpName', function (err, Participants) {
+          if (err) return next(err);
+            
+          Participants.forEach(function(Participant){
+            if (Participant.EmpName != null) {
+              console.log('doc.count');
+             // console.log(Participant.EmpNum);
+              console.log(doc.ParticipantMailId);
+              Employee.findByIdAndUpdate(Participant._id, {'EmpName':doc.ParticipantMailId}, function (err, products){
+             
+          });
+        }
+       // else
+
+      })//End of for each participant
+      });
+
+      });
+        
+  });
+
+
+
+        csvModel.find( { $and: [ {CourseCode: {$in: ["TETAJEEDEVIC1010","TETAIVSCPSEC1001","PQLYSEPAGLIC3001","TETAJEEDEVIC1000","TETAIVSSELIC1002","PQLYAGLDEVIC2001"]}}, {"ParticipantDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1","IVS-FS2"]}},{"isCompleted":"TRUE"}]})
+    //csvModel.find({CurrentCity: {$in: ["CHENNAI","PUNE"]}},{"EmpDU" : { $in : ["IVS-DEVOPDU3", "IVS-DEVOPFS1","IVS-FS","IVS-FS2"]}})
+    .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function(err, docs) {
+          csvModel.countDocuments().exec(function(err, count) {
+                if (err) return next(err)
+                console.log(count);  
+                  res.render('uploadedData', {
+                  // res.render('tes', {
+                   dataUpload:docs,
+                     pages: Math.ceil(count / perPage)
+                 })
+            })
+        }); 
  };
